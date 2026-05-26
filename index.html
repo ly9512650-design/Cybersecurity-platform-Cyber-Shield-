@@ -1,0 +1,3059 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>درع السايبر | CyberShield - حماية رقمية متقدمة</title>
+    <meta name="description" content="منصة الأمن السيبراني المتقدمة - حماية رقمية شاملة للأفراد والمؤسسات">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Google Fonts: Cairo -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Chart.js for Dashboard -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        cairo: ['Cairo', 'sans-serif'],
+                    },
+                    colors: {
+                        cyber: {
+                            dark: '#0a0e1a',
+                            darker: '#050811',
+                            blue: '#00d4ff',
+                            purple: '#a855f7',
+                            neon: '#00f0ff',
+                            accent: '#7c3aed',
+                            surface: '#111827',
+                            card: '#1a1f2e'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        * {
+            font-family: 'Cairo', sans-serif;
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            background-color: #0a0e1a;
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0e1a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #00d4ff;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #a855f7;
+        }
+        
+        /* Neon Glow Effects */
+        .neon-text {
+            text-shadow: 0 0 10px rgba(0, 212, 255, 0.5), 0 0 20px rgba(0, 212, 255, 0.3);
+        }
+        .neon-border {
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.3), inset 0 0 15px rgba(0, 212, 255, 0.1);
+        }
+        .neon-purple {
+            text-shadow: 0 0 10px rgba(168, 85, 247, 0.5), 0 0 20px rgba(168, 85, 247, 0.3);
+        }
+        
+        /* Hero Video Background */
+        .hero-video-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+        .hero-video-container video {
+            min-width: 100%;
+            min-height: 100%;
+            object-fit: cover;
+            opacity: 0.6;
+        }
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(10, 14, 26, 0.95) 0%, rgba(10, 14, 26, 0.8) 50%, rgba(124, 58, 237, 0.3) 100%);
+            z-index: 1;
+        }
+        
+        /* Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        .float-animation {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(0, 212, 255, 0.4); }
+            50% { box-shadow: 0 0 40px rgba(0, 212, 255, 0.8), 0 0 60px rgba(168, 85, 247, 0.4); }
+        }
+        .pulse-glow {
+            animation: pulse-glow 3s ease-in-out infinite;
+        }
+        
+        @keyframes scan-line {
+            0% { top: 0%; }
+            100% { top: 100%; }
+        }
+        .scan-line {
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #00d4ff, transparent);
+            animation: scan-line 3s linear infinite;
+        }
+        
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        .typing-effect {
+            overflow: hidden;
+            white-space: nowrap;
+            animation: typing 3s steps(40, end);
+        }
+        
+        /* Glassmorphism */
+        .glass {
+            background: rgba(17, 24, 39, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .glass-card {
+            background: rgba(26, 31, 46, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        .glass-card:hover {
+            border-color: rgba(0, 212, 255, 0.6);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 212, 255, 0.2);
+        }
+        
+        /* Grid Background */
+        .grid-bg {
+            background-image: 
+                linear-gradient(rgba(0, 212, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 212, 255, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+        
+        /* Particles */
+        #particles-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        /* Dashboard Styles */
+        .dashboard-card {
+            background: rgba(26, 31, 46, 0.9);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+        }
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #00d4ff, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        /* Scanner Animation */
+        .scanner-ring {
+            border: 3px solid rgba(0, 212, 255, 0.3);
+            border-radius: 50%;
+            animation: scanner-pulse 2s ease-out infinite;
+        }
+        @keyframes scanner-pulse {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(1.5); opacity: 0; }
+        }
+        
+        /* Threat Level Indicators */
+        .threat-critical { color: #ef4444; text-shadow: 0 0 10px rgba(239, 68, 68, 0.5); }
+        .threat-high { color: #f97316; text-shadow: 0 0 10px rgba(249, 115, 22, 0.5); }
+        .threat-medium { color: #eab308; text-shadow: 0 0 10px rgba(234, 179, 8, 0.5); }
+        .threat-low { color: #22c55e; text-shadow: 0 0 10px rgba(34, 197, 94, 0.5); }
+        
+        /* Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-overlay.active {
+            display: flex;
+        }
+        .modal-content {
+            background: #1a1f2e;
+            border: 2px solid #00d4ff;
+            border-radius: 16px;
+            padding: 30px;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            animation: modalIn 0.3s ease;
+        }
+        @keyframes modalIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        /* Progress Bar Animation */
+        @keyframes progress-fill {
+            from { width: 0%; }
+        }
+        .progress-fill {
+            animation: progress-fill 2s ease-out forwards;
+        }
+        
+        /* Live Indicator */
+        .live-dot {
+            width: 10px;
+            height: 10px;
+            background: #22c55e;
+            border-radius: 50%;
+            display: inline-block;
+            animation: live-blink 1s infinite;
+        }
+        @keyframes live-blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+        
+        /* Terminal Effect */
+        .terminal {
+            background: #050811;
+            border: 1px solid #00d4ff;
+            border-radius: 8px;
+            padding: 20px;
+            font-family: 'Courier New', monospace;
+            color: #00ff00;
+            overflow-y: auto;
+            max-height: 300px;
+        }
+        .terminal-line {
+            margin: 5px 0;
+            opacity: 0;
+            animation: fadeIn 0.3s forwards;
+        }
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+        
+        /* Pricing Card Highlight */
+        .pricing-featured {
+            border: 2px solid #a855f7;
+            transform: scale(1.05);
+            position: relative;
+            overflow: hidden;
+        }
+        .pricing-featured::before {
+            content: 'الأكثر شيوعاً';
+            position: absolute;
+            top: 15px;
+            right: -35px;
+            background: #a855f7;
+            color: white;
+            padding: 5px 40px;
+            transform: rotate(45deg);
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        /* Language Switch */
+        .lang-switch {
+            cursor: pointer;
+            padding: 5px 12px;
+            border-radius: 20px;
+            border: 1px solid #00d4ff;
+            transition: all 0.3s;
+        }
+        .lang-switch:hover {
+            background: rgba(0, 212, 255, 0.2);
+        }
+        
+        /* Reveal on Scroll */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Custom Button Styles */
+        .btn-cyber {
+            background: linear-gradient(135deg, #00d4ff, #7c3aed);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            color: white;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-cyber:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.4);
+        }
+        .btn-cyber::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.1);
+            transform: rotate(45deg);
+            transition: all 0.5s;
+        }
+        .btn-cyber:hover::after {
+            transform: rotate(45deg) translate(50%, 50%);
+        }
+        
+        .btn-outline-cyber {
+            border: 2px solid #00d4ff;
+            background: transparent;
+            padding: 10px 28px;
+            border-radius: 8px;
+            color: #00d4ff;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .btn-outline-cyber:hover {
+            background: rgba(0, 212, 255, 0.1);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+        }
+        
+        /* Loading Spinner */
+        .spinner {
+            border: 3px solid rgba(0, 212, 255, 0.3);
+            border-top: 3px solid #00d4ff;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Security Shield Animation */
+        @keyframes shield-rotate {
+            0% { transform: rotateY(0deg); }
+            100% { transform: rotateY(360deg); }
+        }
+        .shield-3d {
+            animation: shield-rotate 8s linear infinite;
+            transform-style: preserve-3d;
+        }
+        
+        /* Network Lines Background */
+        .network-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            opacity: 0.1;
+        }
+        .network-line {
+            position: absolute;
+            background: linear-gradient(90deg, transparent, #00d4ff, transparent);
+            height: 1px;
+            animation: network-move 8s linear infinite;
+        }
+        @keyframes network-move {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        /* FAQ Accordion */
+        .faq-item {
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 8px;
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+        .faq-question {
+            padding: 15px 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(26, 31, 46, 0.5);
+            transition: all 0.3s;
+        }
+        .faq-question:hover {
+            background: rgba(0, 212, 255, 0.1);
+        }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            padding: 0 20px;
+        }
+        .faq-answer.active {
+            max-height: 500px;
+            padding: 15px 20px;
+        }
+        
+        /* Blog Card */
+        .blog-card {
+            transition: all 0.4s;
+        }
+        .blog-card:hover {
+            transform: translateY(-10px);
+        }
+        .blog-card:hover .blog-image {
+            transform: scale(1.1);
+        }
+        .blog-image {
+            transition: transform 0.4s;
+        }
+        
+        /* Testimonial Carousel */
+        .testimonial-slide {
+            display: none;
+            animation: fadeSlide 0.5s;
+        }
+        .testimonial-slide.active {
+            display: block;
+        }
+        @keyframes fadeSlide {
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        /* Map Dots */
+        .map-dot {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #ef4444;
+            border-radius: 50%;
+            animation: dot-pulse 2s infinite;
+        }
+        @keyframes dot-pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(2); opacity: 0.5; }
+        }
+        
+        /* System Status Bar */
+        .status-bar {
+            background: rgba(5, 8, 17, 0.9);
+            border-top: 1px solid rgba(0, 212, 255, 0.3);
+            padding: 8px 20px;
+            font-size: 0.85rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        /* Tooltip */
+        .tooltip {
+            position: relative;
+        }
+        .tooltip::before {
+            content: attr(data-tip);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 5px 10px;
+            background: #1a1f2e;
+            border: 1px solid #00d4ff;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s;
+        }
+        .tooltip:hover::before {
+            opacity: 1;
+            bottom: calc(100% + 5px);
+        }
+        
+        /* Counter Animation */
+        .counter {
+            font-variant-numeric: tabular-nums;
+        }
+        
+        /* Gradient Text */
+        .gradient-text {
+            background: linear-gradient(135deg, #00d4ff, #a855f7, #00d4ff);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradient-shift 3s ease infinite;
+        }
+        @keyframes gradient-shift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        /* Mobile Menu */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 80%;
+            max-width: 300px;
+            height: 100%;
+            background: #0a0e1a;
+            border-left: 2px solid #00d4ff;
+            z-index: 999;
+            padding: 80px 20px 20px;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+        
+        /* Notification Toast */
+        .toast {
+            position: fixed;
+            top: 100px;
+            right: -400px;
+            background: #1a1f2e;
+            border: 1px solid #00d4ff;
+            border-radius: 8px;
+            padding: 15px 20px;
+            z-index: 1001;
+            transition: right 0.5s ease;
+            max-width: 350px;
+        }
+        .toast.show {
+            right: 20px;
+        }
+        
+        /* Scan Progress */
+        .scan-progress-container {
+            width: 100%;
+            height: 6px;
+            background: rgba(0, 212, 255, 0.1);
+            border-radius: 3px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+        .scan-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #00d4ff, #a855f7);
+            width: 0%;
+            transition: width 0.3s;
+        }
+        
+        /* Table Styles */
+        .cyber-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .cyber-table th {
+            background: rgba(0, 212, 255, 0.1);
+            padding: 12px;
+            text-align: right;
+            border-bottom: 2px solid rgba(0, 212, 255, 0.3);
+            font-weight: 700;
+        }
+        .cyber-table td {
+            padding: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .cyber-table tr:hover {
+            background: rgba(0, 212, 255, 0.05);
+        }
+        
+        /* Hexagon Grid */
+        .hexagon {
+            width: 60px;
+            height: 60px;
+            background: rgba(0, 212, 255, 0.1);
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .hexagon:hover {
+            background: rgba(0, 212, 255, 0.3);
+            transform: scale(1.1);
+        }
+        
+        /* Breathing Animation for Cards */
+        @keyframes breathe {
+            0%, 100% { box-shadow: 0 0 20px rgba(0, 212, 255, 0.1); }
+            50% { box-shadow: 0 0 30px rgba(0, 212, 255, 0.3); }
+        }
+        .breathe {
+            animation: breathe 4s ease-in-out infinite;
+        }
+        
+        /* Glitch Effect */
+        .glitch {
+            position: relative;
+        }
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .glitch::before {
+            left: 2px;
+            text-shadow: -1px 0 #ff00c1;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim 5s infinite linear alternate-reverse;
+        }
+        .glitch::after {
+            left: -2px;
+            text-shadow: -1px 0 #00fff9;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim2 5s infinite linear alternate-reverse;
+        }
+        @keyframes glitch-anim {
+            0% { clip: rect(30px, 9999px, 10px, 0); }
+            20% { clip: rect(80px, 9999px, 90px, 0); }
+            40% { clip: rect(10px, 9999px, 50px, 0); }
+            60% { clip: rect(60px, 9999px, 20px, 0); }
+            80% { clip: rect(20px, 9999px, 70px, 0); }
+            100% { clip: rect(90px, 9999px, 30px, 0); }
+        }
+        @keyframes glitch-anim2 {
+            0% { clip: rect(10px, 9999px, 80px, 0); }
+            20% { clip: rect(70px, 9999px, 20px, 0); }
+            40% { clip: rect(30px, 9999px, 60px, 0); }
+            60% { clip: rect(50px, 9999px, 10px, 0); }
+            80% { clip: rect(90px, 9999px, 40px, 0); }
+            100% { clip: rect(20px, 9999px, 90px, 0); }
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem !important;
+            }
+            .pricing-featured {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body class="font-cairo text-gray-100">
+
+    <!-- Particles Canvas -->
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- System Status Bar -->
+    <div class="status-bar">
+        <div class="flex items-center gap-4">
+            <span class="flex items-center gap-2">
+                <span class="live-dot"></span>
+                <span>النظام يعمل بكامل طاقته</span>
+            </span>
+            <span class="hidden md:inline text-gray-500">|</span>
+            <span class="hidden md:inline text-cyber-blue" id="system-clock">00:00:00</span>
+        </div>
+        <div class="flex items-center gap-4">
+            <span class="text-xs text-gray-400">ping: <span class="text-green-400">12ms</span></span>
+            <span class="text-xs text-gray-400">uptime: <span class="text-cyber-blue" id="uptime">99.98%</span></span>
+            <button onclick="toggleLanguage()" class="lang-switch text-xs">
+                <i class="fas fa-globe ml-1"></i>
+                <span id="lang-text">English</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">
+        <div class="flex items-center gap-3">
+            <i class="fas fa-shield-alt text-cyber-blue text-xl"></i>
+            <div>
+                <h4 class="font-bold text-sm">تنبيه أمني</h4>
+                <p class="text-xs text-gray-400 mt-1" id="toast-message">تم اكتشاف محاولة اختراق وتم صدها</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobile-menu">
+        <button onclick="toggleMobileMenu()" class="absolute top-5 left-5 text-2xl text-cyber-blue">
+            <i class="fas fa-times"></i>
+        </button>
+        <nav class="flex flex-col gap-4">
+            <a href="#about" class="text-lg hover:text-cyber-blue transition">عن المنصة</a>
+            <a href="#services" class="text-lg hover:text-cyber-blue transition">الخدمات</a>
+            <a href="#dashboard" class="text-lg hover:text-cyber-blue transition">لوحة التحكم</a>
+            <a href="#scanner" class="text-lg hover:text-cyber-blue transition">الماسح الضوئي</a>
+            <a href="#pricing" class="text-lg hover:text-cyber-blue transition">الأسعار</a>
+            <a href="#contact" class="text-lg hover:text-cyber-blue transition">اتصل بنا</a>
+        </nav>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="fixed top-0 left-0 w-full z-50 glass border-b border-cyber-blue/20">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <!-- Logo -->
+                <a href="#" class="flex items-center gap-3 group">
+                    <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-cyber-blue to-cyber-purple flex items-center justify-center group-hover:scale-110 transition">
+                        <i class="fas fa-shield-alt text-white text-xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-black gradient-text">درع السايبر</h1>
+                        <p class="text-xs text-gray-400">CyberShield</p>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden lg:flex items-center gap-8">
+                    <a href="#about" class="text-sm font-medium hover:text-cyber-blue transition relative group">
+                        عن المنصة
+                        <span class="absolute -bottom-1 right-0 w-0 h-0.5 bg-cyber-blue transition-all group-hover:w-full"></span>
+                    </a>
+                    <a href="#services" class="text-sm font-medium hover:text-cyber-blue transition relative group">
+                        الخدمات
+                        <span class="absolute -bottom-1 right-0 w-0 h-0.5 bg-cyber-blue transition-all group-hover:w-full"></span>
+                    </a>
+                    <a href="#dashboard" class="text-sm font-medium hover:text-cyber-blue transition relative group">
+                        لوحة التحكم
+                        <span class="absolute -bottom-1 right-0 w-0 h-0.5 bg-cyber-blue transition-all group-hover:w-full"></span>
+                    </a>
+                    <a href="#scanner" class="text-sm font-medium hover:text-cyber-blue transition relative group">
+                        الماسح الضوئي
+                        <span class="absolute -bottom-1 right-0 w-0 h-0.5 bg-cyber-blue transition-all group-hover:w-full"></span>
+                    </a>
+                    <a href="#threats" class="text-sm font-medium hover:text-cyber-blue transition relative group">
+                        التهديدات
+                        <span class="absolute -bottom-1 right-0 w-0 h-0.5 bg-cyber-blue transition-all group-hover:w-full"></span>
+                    </a>
+                    <a href="#pricing" class="text-sm font-medium hover:text-cyber-blue transition relative group">
+                        الأسعار
+                        <span class="absolute -bottom-1 right-0 w-0 h-0.5 bg-cyber-blue transition-all group-hover:w-full"></span>
+                    </a>
+                </div>
+
+                <!-- CTA Buttons -->
+                <div class="hidden lg:flex items-center gap-4">
+                    <button onclick="openLoginModal()" class="btn-outline-cyber text-sm">
+                        <i class="fas fa-user-lock ml-2"></i>
+                        تسجيل الدخول
+                    </button>
+                    <button onclick="openConsultModal()" class="btn-cyber text-sm">
+                        استشارة مجانية
+                        <i class="fas fa-arrow-left mr-2"></i>
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button onclick="toggleMobileMenu()" class="lg:hidden text-2xl text-cyber-blue">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+        <!-- Video Background -->
+        <div class="hero-video-container">
+            <video autoplay muted loop playsinline>
+                <source src="https://videos.pexels.com/video-files/8724333/8724333-hd_1920_1080_25fps.mp4" type="video/mp4">
+                <!-- Fallback video -->
+                <source src="https://videos.pexels.com/video-files/8724333/8724333-hd_1920_1080_25fps.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="hero-overlay"></div>
+
+        <!-- Network Background Lines -->
+        <div class="network-bg">
+            <div class="network-line" style="top: 20%; animation-delay: 0s;"></div>
+            <div class="network-line" style="top: 40%; animation-delay: 2s;"></div>
+            <div class="network-line" style="top: 60%; animation-delay: 4s;"></div>
+            <div class="network-line" style="top: 80%; animation-delay: 6s;"></div>
+        </div>
+
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="text-center lg:text-right">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyber-blue/10 border border-cyber-blue/30 mb-6">
+                        <span class="live-dot"></span>
+                        <span class="text-sm font-medium text-cyber-blue">نظام الحماية نشط الآن</span>
+                    </div>
+                    
+                    <h1 class="hero-title text-5xl md:text-7xl font-black mb-6 leading-tight">
+                        <span class="block text-white">حماية رقمية</span>
+                        <span class="gradient-text glitch" data-text="متقدمة">متقدمة</span>
+                    </h1>
+                    
+                    <p class="text-xl text-gray-300 mb-8 leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                        منصة درع السايبر توفر حماية شاملة ضد التهديدات السيبرانية المتطورة. نحمي بياناتك وشبكاتك بأحدث تقنيات الذكاء الاصطناعي والتشفير.
+                    </p>
+                    
+                    <div class="flex flex-wrap gap-4 justify-center lg:justify-start mb-12">
+                        <button onclick="scrollToSection('services')" class="btn-cyber text-lg pulse-glow">
+                            اكتشف خدماتنا
+                            <i class="fas fa-rocket mr-2"></i>
+                        </button>
+                        <button onclick="openDemoModal()" class="btn-outline-cyber text-lg">
+                            جرب المنصة مجاناً
+                            <i class="fas fa-play mr-2"></i>
+                        </button>
+                    </div>
+                    
+                    <!-- Stats -->
+                    <div class="grid grid-cols-3 gap-6 max-w-lg mx-auto lg:mx-0">
+                        <div class="text-center">
+                            <div class="text-3xl font-black text-cyber-blue counter" data-target="15000">0</div>
+                            <div class="text-sm text-gray-400">هجمة تم صدها</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-black text-cyber-purple counter" data-target="500">0</div>
+                            <div class="text-sm text-gray-400">عميل نشط</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-black text-cyber-blue counter" data-target="99.9">0</div>
+                            <div class="text-sm text-gray-400">نسبة الأمان %</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="hidden lg:block relative">
+                    <div class="shield-3d float-animation">
+                        <div class="w-80 h-80 mx-auto relative">
+                            <div class="absolute inset-0 rounded-full bg-gradient-to-br from-cyber-blue/20 to-cyber-purple/20 blur-3xl"></div>
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <i class="fas fa-shield-alt text-9xl text-cyber-blue/80 drop-shadow-[0_0_30px_rgba(0,212,255,0.5)]"></i>
+                            </div>
+                            <!-- Orbiting Elements -->
+                            <div class="absolute inset-0 animate-spin" style="animation-duration: 10s;">
+                                <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-4">
+                                    <i class="fas fa-lock text-cyber-purple text-2xl"></i>
+                                </div>
+                            </div>
+                            <div class="absolute inset-0 animate-spin" style="animation-duration: 15s; animation-direction: reverse;">
+                                <div class="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-4">
+                                    <i class="fas fa-key text-cyber-blue text-2xl"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+            <i class="fas fa-chevron-down text-cyber-blue text-2xl"></i>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 relative grid-bg">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-4xl font-black mb-4">عن <span class="gradient-text">درع السايبر</span></h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">منصة متكاملة للأمن السيبراني تأسست بهدف حماية العالم الرقمي</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12 items-center mb-20 reveal">
+                <div>
+                    <h3 class="text-2xl font-bold mb-6 text-cyber-blue">رؤيتنا</h3>
+                    <p class="text-gray-300 leading-relaxed mb-6">
+                        نطمح لبناء عالم رقمي آمن حيث يمكن للأفراد والمؤسسات الاستفادة من التكنولوجيا دون خوف من التهديدات السيبرانية. نؤمن بأن الأمان الرقمي حق أساسي للجميع.
+                    </p>
+                    <h3 class="text-2xl font-bold mb-6 text-cyber-purple">رسالتنا</h3>
+                    <p class="text-gray-300 leading-relaxed">
+                        توفير حلول أمنية متطورة بأسعار معقولة، مع التركيز على الابتكار المستمر والتعليم المجتمعي في مجال الأمن السيبراني. نسعى لتمكين كل فرد بحماية رقمية موثوقة.
+                    </p>
+                </div>
+                <div class="relative">
+                    <div class="glass-card p-8 rounded-2xl">
+                        <div class="grid grid-cols-2 gap-6">
+                            <div class="text-center p-4">
+                                <i class="fas fa-award text-4xl text-cyber-blue mb-2"></i>
+                                <h4 class="font-bold">ISO 27001</h4>
+                                <p class="text-sm text-gray-400">معتمد دولياً</p>
+                            </div>
+                            <div class="text-center p-4">
+                                <i class="fas fa-globe text-4xl text-cyber-purple mb-2"></i>
+                                <h4 class="font-bold">50+ دولة</h4>
+                                <p class="text-sm text-gray-400">نطاق الخدمة</p>
+                            </div>
+                            <div class="text-center p-4">
+                                <i class="fas fa-users text-4xl text-cyber-blue mb-2"></i>
+                                <h4 class="font-bold">200+ خبير</h4>
+                                <p class="text-sm text-gray-400">فريق العمل</p>
+                            </div>
+                            <div class="text-center p-4">
+                                <i class="fas fa-clock text-4xl text-cyber-purple mb-2"></i>
+                                <h4 class="font-bold">24/7</h4>
+                                <p class="text-sm text-gray-400">دعم فني</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Values -->
+            <div class="grid md:grid-cols-4 gap-6 reveal">
+                <div class="glass-card p-6 rounded-xl text-center">
+                    <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-cyber-blue/10 flex items-center justify-center">
+                        <i class="fas fa-shield-alt text-3xl text-cyber-blue"></i>
+                    </div>
+                    <h4 class="font-bold text-lg mb-2">الحماية المسبقة</h4>
+                    <p class="text-sm text-gray-400">نكتشف التهديدات قبل وقوعها باستخدام الذكاء الاصطناعي</p>
+                </div>
+                <div class="glass-card p-6 rounded-xl text-center">
+                    <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-cyber-purple/10 flex items-center justify-center">
+                        <i class="fas fa-bolt text-3xl text-cyber-purple"></i>
+                    </div>
+                    <h4 class="font-bold text-lg mb-2">الاستجابة السريعة</h4>
+                    <p class="text-sm text-gray-400">رد فعل فوري على أي تهديد في أقل من 30 ثانية</p>
+                </div>
+                <div class="glass-card p-6 rounded-xl text-center">
+                    <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-cyber-blue/10 flex items-center justify-center">
+                        <i class="fas fa-eye text-3xl text-cyber-blue"></i>
+                    </div>
+                    <h4 class="font-bold text-lg mb-2">الشفافية الكاملة</h4>
+                    <p class="text-sm text-gray-400">تقارير مفصلة وشفافة عن كل نشاط أمني</p>
+                </div>
+                <div class="glass-card p-6 rounded-xl text-center">
+                    <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-cyber-purple/10 flex items-center justify-center">
+                        <i class="fas fa-lightbulb text-3xl text-cyber-purple"></i>
+                    </div>
+                    <h4 class="font-bold text-lg mb-2">الابتكار المستمر</h4>
+                    <p class="text-sm text-gray-400">تحديثات مستمرة لتقنيات الحماية</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 relative">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-4xl font-black mb-4">خدماتنا <span class="gradient-text">وحلولنا</span></h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">حلول أمنية متكاملة لحماية كل جوانب البنية التحتية الرقمية</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="glass-card p-8 rounded-2xl reveal breathe">
+                    <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-cyber-blue to-cyber-blue/50 flex items-center justify-center mb-6">
+                        <i class="fas fa-network-wired text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">حماية الشبكات المتقدمة</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                        حماية شاملة للشبكات الداخلية والخارجية باستخدام جدران نارية ذكية وأنظمة كشف التسلل (IDS/IPS) المتطورة.
+                    </p>
+                    <ul class="text-sm text-gray-500 space-y-2">
+                        <li><i class="fas fa-check text-cyber-blue ml-2"></i>جدران نارية Next-Gen</li>
+                        <li><i class="fas fa-check text-cyber-blue ml-2"></i>كشف التسلل في الوقت الفعلي</li>
+                        <li><i class="fas fa-check text-cyber-blue ml-2"></i>تجزئة الشبكة الآمنة</li>
+                    </ul>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="glass-card p-8 rounded-2xl reveal breathe">
+                    <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-cyber-purple to-cyber-purple/50 flex items-center justify-center mb-6">
+                        <i class="fas fa-cloud text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">أمن الحوسبة السحابية</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                        حماية البيانات والتطبيقات المستضافة على السحابة مع التكامل مع AWS، Azure، وGoogle Cloud Platform.
+                    </p>
+                    <ul class="text-sm text-gray-500 space-y-2">
+                        <li><i class="fas fa-check text-cyber-purple ml-2"></i>تشفير البيانات السحابية</li>
+                        <li><i class="fas fa-check text-cyber-purple ml-2"></i>إدارة الهوية والوصول (IAM)</li>
+                        <li><i class="fas fa-check text-cyber-purple ml-2"></i>الامتثال للمعايير الدولية</li>
+                    </ul>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="glass-card p-8 rounded-2xl reveal breathe">
+                    <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-cyber-blue to-cyber-blue/50 flex items-center justify-center mb-6">
+                        <i class="fas fa-bug text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">اختبار الاختراق</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                        محاكاة هجمات إلكترونية حقيقية لاكتشاف الثغرات الأمنية قبل استغلالها من قبل المخترقين.
+                    </p>
+                    <ul class="text-sm text-gray-500 space-y-2">
+                        <li><i class="fas fa-check text-cyber-blue ml-2"></i>اختبار الاختراق للويب</li>
+                        <li><i class="fas fa-check text-cyber-blue ml-2"></i>اختبار الاختراق للشبكات</li>
+                        <li><i class="fas fa-check text-cyber-blue ml-2"></i>اختبار الهندسة الاجتماعية</li>
+                    </ul>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="glass-card p-8 rounded-2xl reveal breathe">
+                    <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-cyber-purple to-cyber-purple/50 flex items-center justify-center mb-6">
+                        <i class="fas fa-brain text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">الذكاء الاصطناعي الأمني</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                        استخدام خوارزميات التعلم العميق لتحليل الأنماط واكتشاف التهديدات المعقدة التي تتجاوز الحلول التقليدية.
+                    </p>
+                    <ul class="text-sm text-gray-500 space-y-2">
+                        <li><i class="fas fa-check text-cyber-purple ml-2"></i>تحليل السلوك الشاذ</li>
+                        <li><i class="fas fa-check text-cyber-purple ml-2"></i>التنبؤ بالتهديدات</li>
+                        <li><i class="fas fa-check text-cyber-purple ml-2"></i>الاستجابة الآلية</li>
+                    </ul>
+                </div>
+
+                <!-- Service 5 -->
+                <div class="glass-card p-8 rounded-2xl reveal breathe">
+                    <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-cyber-blue to-cyber-blue/50 flex items-center justify-center mb-6">
+                        <i class="fas fa-mobile-alt text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">أمن الأجهزة المحمولة</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                        حماية الهواتف الذكية والأجهزة اللوحية في بيئات العمل مع إدارة الأجهزة (MDM) والتطبيقات (MAM).
+                    </p>
+                    <ul class="text-sm text-gray-500 space-y-2">
+                        <li><i class="fas fa-check text-cyber-blue ml-2"></i>إدارة الأجهزة المحمولة</li>
+                        <li><i class="fas fa-check text-cyber-blue ml-2"></i>حماية البيانات على الجوال</li>
+                        <li><i class="fas fa-check text-cyber-blue ml-2"></i>التحكم في الوصول للتطبيقات</li>
+                    </ul>
+                </div>
+
+                <!-- Service 6 -->
+                <div class="glass-card p-8 rounded-2xl reveal breathe">
+                    <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-cyber-purple to-cyber-purple/50 flex items-center justify-center mb-6">
+                        <i class="fas fa-database text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">حماية قواعد البيانات</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                        تأمين البيانات الحساسة مع التشفير، التقنيع، ومراقبة الوصول في الوقت الفعلي لقواعد البيانات.
+                    </p>
+                    <ul class="text-sm text-gray-500 space-y-2">
+                        <li><i class="fas fa-check text-cyber-purple ml-2"></i>تشفير قاعدة البيانات</li>
+                        <li><i class="fas fa-check text-cyber-purple ml-2"></i>التقنيع الديناميكي</li>
+                        <li><i class="fas fa-check text-cyber-purple ml-2"></i>تدقيق الوصول الشامل</li>
+                    </ul>
+                </div>
+
+                <!-- Service 7 -->
+                <div class="glass-card p-8 rounded-2xl reveal breathe">
+                    <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-cyber-blue to-cyber-blue/50 flex items-center justify-center mb-6">
+                        <i class="fas fa-user-shield text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">إدارة الهوية والوصول</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                        أنظمة IAM متقدمة مع المصادقة متعددة العوامل (MFA) والتحكم في الوصول المستند إلى الأدوار (RBAC).
+                    </p>
+                    <ul class="text-sm text-gray-500 space-y-2">
+                        <li><i class="fas fa-check text-cyber-blue ml-2"></i>مصادقة متعددة العوامل</li>
+                        <li><i class="fas fa-check text-cyber-blue ml-2"></i>الوصول المستند للأدوار</li>
+                        <li><i class="fas fa-check text-cyber-blue ml-2"></i>إدارة كلمات المرور المتقدمة</li>
+                    </ul>
+                </div>
+
+                <!-- Service 8 -->
+                <div class="glass-card p-8 rounded-2xl reveal breathe">
+                    <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-cyber-purple to-cyber-purple/50 flex items-center justify-center mb-6">
+                        <i class="fas fa-file-contract text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">الامتثال والتدقيق</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                        مساعدة المؤسسات في الامتثال للمعايير الدولية مثل GDPR، HIPAA، PCI DSS، وISO 27001.
+                    </p>
+                    <ul class="text-sm text-gray-500 space-y-2">
+                        <li><i class="fas fa-check text-cyber-purple ml-2"></i>تقييم الامتثال</li>
+                        <li><i class="fas fa-check text-cyber-purple ml-2"></i>التدقيق الأمني المستمر</li>
+                        <li><i class="fas fa-check text-cyber-purple ml-2"></i>إعداد التقارير التنظيمية</li>
+                    </ul>
+                </div>
+
+                <!-- Service 9 -->
+                <div class="glass-card p-8 rounded-2xl reveal breathe">
+                    <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-cyber-blue to-cyber-blue/50 flex items-center justify-center mb-6">
+                        <i class="fas fa-hdd text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">النسخ الاحتياطي والتعافي</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                        حلول نسخ احتياطي آمنة مع خطط تعافي من الكوارث (DRP) لضمان استمرارية الأعمال.
+                    </p>
+                    <ul class="text-sm text-gray-500 space-y-2">
+                        <li><i class="fas fa-check text-cyber-blue ml-2"></i>نسخ احتياطي متكرر</li>
+                        <li><i class="fas fa-check text-cyber-blue ml-2"></i>تعافي سريع من الكوارث</li>
+                        <li><i class="fas fa-check text-cyber-blue ml-2"></i>اختبار استعادة البيانات</li>
+                    </ul>
+                </div>
+
+                <!-- Service 10 -->
+                <div class="glass-card p-8 rounded-2xl reveal breathe">
+                    <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-cyber-purple to-cyber-purple/50 flex items-center justify-center mb-6">
+                        <i class="fas fa-graduation-cap text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">التدريب والتوعية الأمنية</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                        برامج تدريبية متخصصة لرفع الوعي الأمني لموظفيك وتقليل مخاطر الهندسة الاجتماعية.
+                    </p>
+                    <ul class="text-sm text-gray-500 space-y-2">
+                        <li><i class="fas fa-check text-cyber-purple ml-2"></i>محاكاة هجمات التصيد</li>
+                        <li><i class="fas fa-check text-cyber-purple ml-2"></i>دورات تدريبية تفاعلية</li>
+                        <li><i class="fas fa-check text-cyber-purple ml-2"></i>تقييم المعرفة الأمنية</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard Demo Section -->
+    <section id="dashboard" class="py-20 relative grid-bg">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-4xl font-black mb-4">لوحة التحكم <span class="gradient-text">التفاعلية</span></h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">جرب لوحة التحكم المتقدمة لمراقبة التهديدات الأمنية في الوقت الفعلي</p>
+            </div>
+
+            <div class="glass rounded-2xl p-6 reveal">
+                <!-- Dashboard Header -->
+                <div class="flex flex-wrap justify-between items-center mb-6 pb-4 border-b border-cyber-blue/20">
+                    <div class="flex items-center gap-3">
+                        <div class="w-3 h-3 rounded-full bg-green-500 live-dot"></div>
+                        <h3 class="text-xl font-bold">مركز العمليات الأمنية (SOC)</h3>
+                    </div>
+                    <div class="flex items-center gap-4 text-sm">
+                        <span class="text-gray-400">آخر تحديث: <span class="text-cyber-blue" id="last-update">الآن</span></span>
+                        <button onclick="refreshDashboard()" class="text-cyber-blue hover:text-cyber-purple transition">
+                            <i class="fas fa-sync-alt" id="refresh-icon"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Stats Grid -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                    <div class="dashboard-card">
+                        <div class="text-gray-400 text-sm mb-1">التهديدات النشطة</div>
+                        <div class="stat-value" id="active-threats">23</div>
+                        <div class="text-xs text-red-400 mt-1"><i class="fas fa-arrow-up ml-1"></i>+12% عن الأمس</div>
+                    </div>
+                    <div class="dashboard-card">
+                        <div class="text-gray-400 text-sm mb-1">الهجمات المُصدّة</div>
+                        <div class="stat-value" id="blocked-attacks">1,247</div>
+                        <div class="text-xs text-green-400 mt-1"><i class="fas fa-shield-alt ml-1"></i>100% نجاح</div>
+                    </div>
+                    <div class="dashboard-card">
+                        <div class="text-gray-400 text-sm mb-1">نقاط الضعف</div>
+                        <div class="stat-value" id="vulnerabilities">7</div>
+                        <div class="text-xs text-yellow-400 mt-1">3 حرجة</div>
+                    </div>
+                    <div class="dashboard-card">
+                        <div class="text-gray-400 text-sm mb-1">صحة النظام</div>
+                        <div class="stat-value text-green-400">98.7%</div>
+                        <div class="text-xs text-green-400 mt-1">ممتازة</div>
+                    </div>
+                </div>
+
+                <!-- Charts Row -->
+                <div class="grid md:grid-cols-2 gap-6 mb-6">
+                    <div class="dashboard-card">
+                        <h4 class="font-bold mb-4 text-cyber-blue">الهجمات حسب النوع</h4>
+                        <canvas id="attacksChart" height="200"></canvas>
+                    </div>
+                    <div class="dashboard-card">
+                        <h4 class="font-bold mb-4 text-cyber-purple">حركة المرور الأمنية</h4>
+                        <canvas id="trafficChart" height="200"></canvas>
+                    </div>
+                </div>
+
+                <!-- World Map Simulation -->
+                <div class="dashboard-card mb-6 relative overflow-hidden" style="height: 300px;">
+                    <h4 class="font-bold mb-4 text-cyber-blue">خريطة الهجمات المباشرة</h4>
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="relative w-full max-w-2xl h-full">
+                            <!-- Simulated World Map with Dots -->
+                            <div class="absolute inset-0 opacity-30">
+                                <svg viewBox="0 0 800 400" class="w-full h-full">
+                                    <!-- Simplified World Map Path -->
+                                    <path d="M50,200 Q100,150 150,180 T250,160 T350,180 T450,150 T550,170 T650,140 T750,180" 
+                                          fill="none" stroke="#00d4ff" stroke-width="1" opacity="0.3"/>
+                                    <path d="M50,250 Q100,200 150,230 T250,210 T350,230 T450,200 T550,220 T650,190 T750,230" 
+                                          fill="none" stroke="#a855f7" stroke-width="1" opacity="0.3"/>
+                                </svg>
+                            </div>
+                            <!-- Attack Dots -->
+                            <div class="map-dot" style="top: 30%; left: 20%;"></div>
+                            <div class="map-dot" style="top: 45%; left: 45%; animation-delay: 0.5s;"></div>
+                            <div class="map-dot" style="top: 35%; left: 70%; animation-delay: 1s;"></div>
+                            <div class="map-dot" style="top: 55%; left: 30%; animation-delay: 1.5s;"></div>
+                            <div class="map-dot" style="top: 40%; left: 80%; animation-delay: 2s;"></div>
+                            <div class="map-dot" style="top: 50%; left: 55%; animation-delay: 0.3s;"></div>
+                            
+                            <!-- Connection Lines -->
+                            <svg class="absolute inset-0 w-full h-full" style="pointer-events: none;">
+                                <line x1="20%" y1="30%" x2="45%" y2="45%" stroke="#ef4444" stroke-width="1" opacity="0.5">
+                                    <animate attributeName="opacity" values="0;1;0" dur="2s" repeatCount="indefinite"/>
+                                </line>
+                                <line x1="45%" y1="45%" x2="70%" y2="35%" stroke="#ef4444" stroke-width="1" opacity="0.5">
+                                    <animate attributeName="opacity" values="0;1;0" dur="2s" repeatCount="indefinite" begin="0.5s"/>
+                                </line>
+                                <line x1="30%" y1="55%" x2="55%" y2="50%" stroke="#ef4444" stroke-width="1" opacity="0.5">
+                                    <animate attributeName="opacity" values="0;1;0" dur="2s" repeatCount="indefinite" begin="1s"/>
+                                </line>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Alerts Table -->
+                <div class="dashboard-card">
+                    <h4 class="font-bold mb-4 text-cyber-blue">التنبيهات الأمنية الأخيرة</h4>
+                    <div class="overflow-x-auto">
+                        <table class="cyber-table text-sm">
+                            <thead>
+                                <tr>
+                                    <th>الوقت</th>
+                                    <th>نوع التهديد</th>
+                                    <th>المصدر</th>
+                                    <th>الخطورة</th>
+                                    <th>الحالة</th>
+                                </tr>
+                            </thead>
+                            <tbody id="alerts-table">
+                                <tr>
+                                    <td>14:32:05</td>
+                                    <td><i class="fas fa-bug text-red-500 ml-1"></i> محاولة SQL Injection</td>
+                                    <td>192.168.1.105</td>
+                                    <td><span class="threat-critical">حرجة</span></td>
+                                    <td><span class="text-green-400"><i class="fas fa-check-circle ml-1"></i> تم الصد</span></td>
+                                </tr>
+                                <tr>
+                                    <td>14:28:12</td>
+                                    <td><i class="fas fa-envelope text-orange-500 ml-1"></i> هجوم تصيد احتيالي</td>
+                                    <td>phishing@evil.com</td>
+                                    <td><span class="threat-high">عالية</span></td>
+                                    <td><span class="text-green-400"><i class="fas fa-check-circle ml-1"></i> تم الصد</span></td>
+                                </tr>
+                                <tr>
+                                    <td>14:15:33</td>
+                                    <td><i class="fas fa-network-wired text-yellow-500 ml-1"></i> فحص منفذ غير مصرح</td>
+                                    <td>10.0.0.45</td>
+                                    <td><span class="threat-medium">متوسطة</span></td>
+                                    <td><span class="text-yellow-400"><i class="fas fa-exclamation-triangle ml-1"></i> تحت المراقبة</span></td>
+                                </tr>
+                                <tr>
+                                    <td>13:58:09</td>
+                                    <td><i class="fas fa-key text-green-500 ml-1"></i> محاولة تسجيل دخول فاشلة</td>
+                                    <td>admin@company.com</td>
+                                    <td><span class="threat-low">منخفضة</span></td>
+                                    <td><span class="text-green-400"><i class="fas fa-check-circle ml-1"></i> تم الصد</span></td>
+                                </tr>
+                                <tr>
+                                    <td>13:42:51</td>
+                                    <td><i class="fas fa-file-code text-red-500 ml-1"></i> تنفيذ كود ضار</td>
+                                    <td>malware.exe</td>
+                                    <td><span class="threat-critical">حرجة</span></td>
+                                    <td><span class="text-green-400"><i class="fas fa-check-circle ml-1"></i> تم العزل</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vulnerability Scanner Section -->
+    <section id="scanner" class="py-20 relative">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-4xl font-black mb-4">الماسح الضوئي <span class="gradient-text">للثغرات</span></h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">أداة فحص تفاعلية لاكتشاف نقاط الضعف في مواقعك وشبكاتك</p>
+            </div>
+
+            <div class="max-w-3xl mx-auto reveal">
+                <div class="glass rounded-2xl p-8">
+                    <div class="text-center mb-8">
+                        <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-cyber-blue/10 flex items-center justify-center scanner-ring">
+                            <i class="fas fa-radar text-4xl text-cyber-blue"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-2">فحص شامل للثغرات الأمنية</h3>
+                        <p class="text-gray-400">أدخل عنوان URL أو IP للبدء في الفحص الاحترافي</p>
+                    </div>
+
+                    <div class="flex gap-4 mb-6">
+                        <input type="text" id="scan-target" placeholder="example.com أو 192.168.1.1" 
+                               class="flex-1 bg-cyber-darker border border-cyber-blue/30 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-cyber-blue transition">
+                        <select id="scan-type" class="bg-cyber-darker border border-cyber-blue/30 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyber-blue">
+                            <option value="quick">فحص سريع</option>
+                            <option value="full">فحص شامل</option>
+                            <option value="web">فحص ويب</option>
+                            <option value="network">فحص شبكة</option>
+                        </select>
+                    </div>
+
+                    <button onclick="startScan()" id="scan-btn" class="w-full btn-cyber text-lg mb-6">
+                        <i class="fas fa-play ml-2"></i>
+                        بدء الفحص الأمني
+                    </button>
+
+                    <!-- Scan Progress -->
+                    <div id="scan-progress" class="hidden mb-6">
+                        <div class="flex justify-between text-sm mb-2">
+                            <span class="text-cyber-blue" id="scan-status">جاري الفحص...</span>
+                            <span class="text-cyber-purple" id="scan-percent">0%</span>
+                        </div>
+                        <div class="scan-progress-container">
+                            <div class="scan-progress-bar" id="scan-bar"></div>
+                        </div>
+                        <div class="terminal mt-4 text-xs" id="scan-terminal"></div>
+                    </div>
+
+                    <!-- Scan Results -->
+                    <div id="scan-results" class="hidden">
+                        <div class="flex items-center justify-between mb-4 pb-4 border-b border-cyber-blue/20">
+                            <h4 class="text-xl font-bold">نتائج الفحص</h4>
+                            <div class="flex gap-2">
+                                <button onclick="downloadReport()" class="text-sm btn-outline-cyber">
+                                    <i class="fas fa-file-pdf ml-1"></i> تحميل التقرير
+                                </button>
+                                <button onclick="aiAnalysis()" class="text-sm btn-cyber">
+                                    <i class="fas fa-brain ml-1"></i> تحليل AI
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-4 gap-4 mb-6">
+                            <div class="text-center p-4 bg-red-500/10 rounded-lg border border-red-500/30">
+                                <div class="text-3xl font-black text-red-500" id="critical-count">0</div>
+                                <div class="text-sm text-gray-400">حرجة</div>
+                            </div>
+                            <div class="text-center p-4 bg-orange-500/10 rounded-lg border border-orange-500/30">
+                                <div class="text-3xl font-black text-orange-500" id="high-count">0</div>
+                                <div class="text-sm text-gray-400">عالية</div>
+                            </div>
+                            <div class="text-center p-4 bg-yellow-500/10 rounded-lg border border-yellow-500/30">
+                                <div class="text-3xl font-black text-yellow-500" id="medium-count">0</div>
+                                <div class="text-sm text-gray-400">متوسطة</div>
+                            </div>
+                            <div class="text-center p-4 bg-green-500/10 rounded-lg border border-green-500/30">
+                                <div class="text-3xl font-black text-green-500" id="low-count">0</div>
+                                <div class="text-sm text-gray-400">منخفضة</div>
+                            </div>
+                        </div>
+
+                        <div class="space-y-3" id="vulnerabilities-list">
+                            <!-- Results will be populated by JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Threat Intelligence Section -->
+    <section id="threats" class="py-20 relative grid-bg">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-4xl font-black mb-4">تغذية <span class="gradient-text">التهديدات المباشرة</span></h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">معلومات استخباراتية عن التهديدات السيبرانية في الوقت الفعلي</p>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-8 reveal">
+                <!-- Live Feed -->
+                <div class="lg:col-span-2 glass rounded-2xl p-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="text-xl font-bold flex items-center gap-2">
+                            <span class="live-dot"></span>
+                            التهديدات المباشرة
+                        </h3>
+                        <div class="flex gap-2">
+                            <button onclick="filterThreats('all')" class="px-3 py-1 rounded bg-cyber-blue/20 text-cyber-blue text-sm">الكل</button>
+                            <button onclick="filterThreats('critical')" class="px-3 py-1 rounded bg-red-500/20 text-red-400 text-sm">حرجة</button>
+                            <button onclick="filterThreats('high')" class="px-3 py-1 rounded bg-orange-500/20 text-orange-400 text-sm">عالية</button>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-3 max-h-96 overflow-y-auto" id="threat-feed">
+                        <!-- Threat items will be populated by JS -->
+                    </div>
+                </div>
+
+                <!-- Threat Stats -->
+                <div class="space-y-6">
+                    <div class="glass rounded-2xl p-6">
+                        <h3 class="text-lg font-bold mb-4 text-cyber-blue">إحصائيات اليوم</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span>هجمات DDoS</span>
+                                    <span class="text-cyber-blue">234</span>
+                                </div>
+                                <div class="h-2 bg-cyber-darker rounded-full overflow-hidden">
+                                    <div class="h-full bg-gradient-to-r from-cyber-blue to-cyber-purple" style="width: 65%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span>برمجيات خبيثة</span>
+                                    <span class="text-cyber-purple">189</span>
+                                </div>
+                                <div class="h-2 bg-cyber-darker rounded-full overflow-hidden">
+                                    <div class="h-full bg-gradient-to-r from-cyber-purple to-cyber-blue" style="width: 45%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span>تصيد احتيالي</span>
+                                    <span class="text-red-400">567</span>
+                                </div>
+                                <div class="h-2 bg-cyber-darker rounded-full overflow-hidden">
+                                    <div class="h-full bg-gradient-to-r from-red-500 to-orange-500" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span>ثغرات zero-day</span>
+                                    <span class="text-yellow-400">12</span>
+                                </div>
+                                <div class="h-2 bg-cyber-darker rounded-full overflow-hidden">
+                                    <div class="h-full bg-gradient-to-r from-yellow-500 to-green-500" style="width: 25%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass rounded-2xl p-6">
+                        <h3 class="text-lg font-bold mb-4 text-cyber-purple">أبرز التهديدات</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-center gap-3 p-3 bg-red-500/10 rounded-lg border border-red-500/20">
+                                <i class="fas fa-virus text-red-500 text-xl"></i>
+                                <div>
+                                    <div class="font-bold text-sm">Ransomware-X</div>
+                                    <div class="text-xs text-gray-400">فيروس فدية جديد</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3 p-3 bg-orange-500/10 rounded-lg border border-orange-500/20">
+                                <i class="fas fa-network-wired text-orange-500 text-xl"></i>
+                                <div>
+                                    <div class="font-bold text-sm">Botnet-Phantom</div>
+                                    <div class="text-xs text-gray-400">شبكة زومبي نشطة</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3 p-3 bg-yellow-500/10 rounded-lg border border-yellow-500/20">
+                                <i class="fas fa-user-secret text-yellow-500 text-xl"></i>
+                                <div>
+                                    <div class="font-bold text-sm">APT-Group 41</div>
+                                    <div class="text-xs text-gray-400">مجموعة قرصنة متقدمة</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Security Tools Section -->
+    <section class="py-20 relative">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-4xl font-black mb-4">أدوات <span class="gradient-text">الأمان</span></h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">أدوات مجانية لتحسين أمانك الرقمي الشخصي</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 reveal">
+                <div class="glass-card p-6 rounded-xl text-center group cursor-pointer" onclick="openTool('password')">
+                    <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-cyber-blue to-cyber-purple flex items-center justify-center group-hover:scale-110 transition">
+                        <i class="fas fa-key text-2xl text-white"></i>
+                    </div>
+                    <h4 class="font-bold mb-2">فاحص كلمة المرور</h4>
+                    <p class="text-sm text-gray-400">تحقق من قوة كلمة المرور</p>
+                </div>
+
+                <div class="glass-card p-6 rounded-xl text-center group cursor-pointer" onclick="openTool('hash')">
+                    <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-cyber-purple to-cyber-blue flex items-center justify-center group-hover:scale-110 transition">
+                        <i class="fas fa-fingerprint text-2xl text-white"></i>
+                    </div>
+                    <h4 class="font-bold mb-2">مولد الهاش</h4>
+                    <p class="text-sm text-gray-400">إنشاء هاش MD5, SHA256</p>
+                </div>
+
+                <div class="glass-card p-6 rounded-xl text-center group cursor-pointer" onclick="openTool('ip')">
+                    <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-cyber-blue to-cyber-purple flex items-center justify-center group-hover:scale-110 transition">
+                        <i class="fas fa-map-marker-alt text-2xl text-white"></i>
+                    </div>
+                    <h4 class="font-bold mb-2">فاحص IP</h4>
+                    <p class="text-sm text-gray-400">تحليل عنوان IP</p>
+                </div>
+
+                <div class="glass-card p-6 rounded-xl text-center group cursor-pointer" onclick="openTool('ssl')">
+                    <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-cyber-purple to-cyber-blue flex items-center justify-center group-hover:scale-110 transition">
+                        <i class="fas fa-lock text-2xl text-white"></i>
+                    </div>
+                    <h4 class="font-bold mb-2">فاحص SSL</h4>
+                    <p class="text-sm text-gray-400">التحقق من شهادة SSL</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Training Section -->
+    <section class="py-20 relative grid-bg">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-4xl font-black mb-4">التدريب <span class="gradient-text">والتوعية</span></h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">برامج تدريبية متخصصة في مجال الأمن السيبراني</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 reveal">
+                <div class="glass-card rounded-2xl overflow-hidden">
+                    <div class="h-48 bg-gradient-to-br from-cyber-blue/20 to-cyber-purple/20 flex items-center justify-center">
+                        <i class="fas fa-shield-alt text-6xl text-cyber-blue/50"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="px-2 py-1 rounded bg-cyber-blue/20 text-cyber-blue text-xs">للمبتدئين</span>
+                            <span class="text-gray-500 text-xs"><i class="far fa-clock ml-1"></i> 20 ساعة</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">أساسيات الأمن السيبراني</h3>
+                        <p class="text-gray-400 text-sm mb-4">تعلم المفاهيم الأساسية للأمن الرقمي وكيفية حماية بياناتك الشخصية.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-cyber-blue font-bold">مجاني</span>
+                            <button class="btn-cyber text-sm">ابدأ الآن</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card rounded-2xl overflow-hidden">
+                    <div class="h-48 bg-gradient-to-br from-cyber-purple/20 to-cyber-blue/20 flex items-center justify-center">
+                        <i class="fas fa-user-secret text-6xl text-cyber-purple/50"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="px-2 py-1 rounded bg-cyber-purple/20 text-cyber-purple text-xs">متوسط</span>
+                            <span class="text-gray-500 text-xs"><i class="far fa-clock ml-1"></i> 40 ساعة</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">اختبار الاختراق الأخلاقي</h3>
+                        <p class="text-gray-400 text-sm mb-4">تعلم تقنيات اختبار الاختراق بشكل أخلاقي وقانوني.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-cyber-purple font-bold">$199</span>
+                            <button class="btn-cyber text-sm">سجل الآن</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card rounded-2xl overflow-hidden">
+                    <div class="h-48 bg-gradient-to-br from-red-500/20 to-orange-500/20 flex items-center justify-center">
+                        <i class="fas fa-bug text-6xl text-red-500/50"></i>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="px-2 py-1 rounded bg-red-500/20 text-red-400 text-xs">متقدم</span>
+                            <span class="text-gray-500 text-xs"><i class="far fa-clock ml-1"></i> 60 ساعة</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">الاستجابة للحوادث الأمنية</h3>
+                        <p class="text-gray-400 text-sm mb-4">تعلم كيفية التعامل مع الاختراقات الأمنية وإدارة الحوادث السيبرانية.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-cyber-blue font-bold">$299</span>
+                            <button class="btn-cyber text-sm">سجل الآن</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cyber News Section -->
+    <section class="py-20 relative">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-4xl font-black mb-4">أخبار <span class="gradient-text">التهديدات</span></h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">آخر الأخبار والتحليلات في عالم الأمن السيبراني</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 reveal">
+                <article class="glass-card rounded-2xl overflow-hidden blog-card">
+                    <div class="h-48 overflow-hidden relative">
+                        <div class="absolute inset-0 bg-gradient-to-t from-cyber-darker to-transparent z-10"></div>
+                        <div class="w-full h-full bg-gradient-to-br from-cyber-blue/30 to-cyber-purple/30 flex items-center justify-center">
+                            <i class="fas fa-newspaper text-4xl text-white/50"></i>
+                        </div>
+                        <div class="absolute top-4 right-4 z-20 px-3 py-1 bg-red-500/80 rounded text-xs font-bold">عاجل</div>
+                    </div>
+                    <div class="p-6">
+                        <div class="text-gray-500 text-sm mb-2"><i class="far fa-calendar ml-1"></i> 25 مايو 2026</div>
+                        <h3 class="text-lg font-bold mb-2 hover:text-cyber-blue transition">اكتشاف ثغرة zero-day جديدة في أنظمة Windows</h3>
+                        <p class="text-gray-400 text-sm mb-4">ثغرة أمنية خطيرة تسمح بتنفيذ كود عن بُعد تم اكتشافها في آخر تحديث...</p>
+                        <a href="#" class="text-cyber-blue text-sm font-bold hover:underline">اقرأ المزيد <i class="fas fa-arrow-left mr-1"></i></a>
+                    </div>
+                </article>
+
+                <article class="glass-card rounded-2xl overflow-hidden blog-card">
+                    <div class="h-48 overflow-hidden relative">
+                        <div class="absolute inset-0 bg-gradient-to-t from-cyber-darker to-transparent z-10"></div>
+                        <div class="w-full h-full bg-gradient-to-br from-cyber-purple/30 to-cyber-blue/30 flex items-center justify-center">
+                            <i class="fas fa-shield-virus text-4xl text-white/50"></i>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="text-gray-500 text-sm mb-2"><i class="far fa-calendar ml-1"></i> 24 مايو 2026</div>
+                        <h3 class="text-lg font-bold mb-2 hover:text-cyber-blue transition">هجوم ransomware يستهدف قطاع الرعاية الصحية</h3>
+                        <p class="text-gray-400 text-sm mb-4">مجموعة قرصنة جديدة تستهدف المستشفيات وتطلب فدية بملايين الدولارات...</p>
+                        <a href="#" class="text-cyber-blue text-sm font-bold hover:underline">اقرأ المزيد <i class="fas fa-arrow-left mr-1"></i></a>
+                    </div>
+                </article>
+
+                <article class="glass-card rounded-2xl overflow-hidden blog-card">
+                    <div class="h-48 overflow-hidden relative">
+                        <div class="absolute inset-0 bg-gradient-to-t from-cyber-darker to-transparent z-10"></div>
+                        <div class="w-full h-full bg-gradient-to-br from-green-500/30 to-cyber-blue/30 flex items-center justify-center">
+                            <i class="fas fa-award text-4xl text-white/50"></i>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="text-gray-500 text-sm mb-2"><i class="far fa-calendar ml-1"></i> 23 مايو 2026</div>
+                        <h3 class="text-lg font-bold mb-2 hover:text-cyber-blue transition">درع السايبر تحصل على شهادة ISO 27001</h3>
+                        <p class="text-gray-400 text-sm mb-4">بفخر نعلن حصولنا على الاعتماد الدولي لنظم إدارة أمن المعلومات...</p>
+                        <a href="#" class="text-cyber-blue text-sm font-bold hover:underline">اقرأ المزيد <i class="fas fa-arrow-left mr-1"></i></a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-20 relative grid-bg">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-4xl font-black mb-4">آراء <span class="gradient-text">عملائنا</span></h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">ثقة مئات المؤسسات في حلولنا الأمنية</p>
+            </div>
+
+            <div class="max-w-4xl mx-auto reveal">
+                <div class="glass rounded-2xl p-8 md:p-12 relative">
+                    <!-- Quote Icon -->
+                    <div class="absolute top-6 right-6 text-6xl text-cyber-blue/20">
+                        <i class="fas fa-quote-right"></i>
+                    </div>
+
+                    <div id="testimonial-container">
+                        <div class="testimonial-slide active text-center">
+                            <div class="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br from-cyber-blue to-cyber-purple flex items-center justify-center text-2xl font-bold">
+                                أ.م
+                            </div>
+                            <p class="text-xl md:text-2xl text-gray-300 leading-relaxed mb-6">
+                                "درع السايبر غيّرت طريقة تعاملنا مع الأمن السيبراني. اكتشفنا ثغرات خطيرة كنا نجهلها تماماً، والفريق كان محترفاً جداً في التعامل."
+                            </p>
+                            <div>
+                                <h4 class="font-bold text-lg">أحمد محمود</h4>
+                                <p class="text-cyber-blue">CTO - شركة التقنية المتقدمة</p>
+                                <div class="flex justify-center gap-1 mt-2 text-yellow-400">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="testimonial-slide text-center">
+                            <div class="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br from-cyber-purple to-cyber-blue flex items-center justify-center text-2xl font-bold">
+                                س.ع
+                            </div>
+                            <p class="text-xl md:text-2xl text-gray-300 leading-relaxed mb-6">
+                                "لوحة التحكم التفاعلية رائعة! نستطيع مراقبة كل التهديدات في الوقت الفعلي والاستجابة فوراً. أنصح بها بشدة."
+                            </p>
+                            <div>
+                                <h4 class="font-bold text-lg">سارة عبدالله</h4>
+                                <p class="text-cyber-purple">مديرة IT - بنك الأمان الرقمي</p>
+                                <div class="flex justify-center gap-1 mt-2 text-yellow-400">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="testimonial-slide text-center">
+                            <div class="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br from-cyber-blue to-cyber-purple flex items-center justify-center text-2xl font-bold">
+                                م.ك
+                            </div>
+                            <p class="text-xl md:text-2xl text-gray-300 leading-relaxed mb-6">
+                                "بعد تعرضنا لهجوم ransomware، درع السايبر ساعدتنا في استعادة أنظمتنا وتأمينها بشكل كامل. خدمة استثنائية!"
+                            </p>
+                            <div>
+                                <h4 class="font-bold text-lg">محمد خالد</h4>
+                                <p class="text-cyber-blue">CEO - مجموعة الصناعات الذكية</p>
+                                <div class="flex justify-center gap-1 mt-2 text-yellow-400">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Navigation -->
+                    <div class="flex justify-center gap-4 mt-8">
+                        <button onclick="prevTestimonial()" class="w-10 h-10 rounded-full border border-cyber-blue/30 flex items-center justify-center hover:bg-cyber-blue/20 transition">
+                            <i class="fas fa-chevron-right text-cyber-blue"></i>
+                        </button>
+                        <div class="flex gap-2 items-center" id="testimonial-dots">
+                            <span class="w-3 h-3 rounded-full bg-cyber-blue"></span>
+                            <span class="w-3 h-3 rounded-full bg-gray-600"></span>
+                            <span class="w-3 h-3 rounded-full bg-gray-600"></span>
+                        </div>
+                        <button onclick="nextTestimonial()" class="w-10 h-10 rounded-full border border-cyber-blue/30 flex items-center justify-center hover:bg-cyber-blue/20 transition">
+                            <i class="fas fa-chevron-left text-cyber-blue"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-20 relative">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-4xl font-black mb-4">خطط <span class="gradient-text">الأسعار</span></h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">اختر الخطة المناسبة لاحتياجاتك الأمنية</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto reveal">
+                <!-- Basic Plan -->
+                <div class="glass-card rounded-2xl p-8">
+                    <div class="text-center mb-6">
+                        <h3 class="text-xl font-bold mb-2">أساسي</h3>
+                        <p class="text-gray-400 text-sm">للأفراد والمشاريع الصغيرة</p>
+                    </div>
+                    <div class="text-center mb-6">
+                        <span class="text-4xl font-black text-white">$49</span>
+                        <span class="text-gray-400">/شهر</span>
+                    </div>
+                    <ul class="space-y-3 mb-8 text-sm">
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-cyber-blue"></i> فحص ثغرات أساسي</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-cyber-blue"></i> حماية من الفيروسات</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-cyber-blue"></i> جدار ناري ذكي</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-cyber-blue"></i> دعم فني عبر البريد</li>
+                        <li class="flex items-center gap-2 text-gray-500"><i class="fas fa-times"></i> حماية DDoS</li>
+                        <li class="flex items-center gap-2 text-gray-500"><i class="fas fa-times"></i> استجابة للحوادث</li>
+                    </ul>
+                    <button onclick="subscribe('basic')" class="w-full btn-outline-cyber">اشترك الآن</button>
+                </div>
+
+                <!-- Pro Plan -->
+                <div class="glass-card pricing-featured rounded-2xl p-8">
+                    <div class="text-center mb-6">
+                        <h3 class="text-xl font-bold mb-2 text-cyber-purple">احترافي</h3>
+                        <p class="text-gray-400 text-sm">للشركات المتوسطة</p>
+                    </div>
+                    <div class="text-center mb-6">
+                        <span class="text-4xl font-black gradient-text">$149</span>
+                        <span class="text-gray-400">/شهر</span>
+                    </div>
+                    <ul class="space-y-3 mb-8 text-sm">
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-cyber-purple"></i> كل ميزات الأساسي</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-cyber-purple"></i> فحص ثغرات متقدم</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-cyber-purple"></i> حماية DDoS</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-cyber-purple"></i> مراقبة 24/7</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-cyber-purple"></i> دعم فني هاتفي</li>
+                        <li class="flex items-center gap-2 text-gray-500"><i class="fas fa-times"></i> فريق استجابة مخصص</li>
+                    </ul>
+                    <button onclick="subscribe('pro')" class="w-full btn-cyber">اشترك الآن</button>
+                </div>
+
+                <!-- Enterprise Plan -->
+                <div class="glass-card rounded-2xl p-8">
+                    <div class="text-center mb-6">
+                        <h3 class="text-xl font-bold mb-2">مؤسسي</h3>
+                        <p class="text-gray-400 text-sm">للشركات الكبيرة</p>
+                    </div>
+                    <div class="text-center mb-6">
+                        <span class="text-4xl font-black text-white">$499</span>
+                        <span class="text-gray-400">/شهر</span>
+                    </div>
+                    <ul class="space-y-3 mb-8 text-sm">
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-cyber-blue"></i> كل ميزات الاحترافي</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-cyber-blue"></i> فريق استجابة مخصص</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-cyber-blue"></i> اختبار اختراق شهري</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-cyber-blue"></i> استشارات أمنية</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-cyber-blue"></i> تدريب موظفين</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-cyber-blue"></i> SLA مضمون 99.99%</li>
+                    </ul>
+                    <button onclick="subscribe('enterprise')" class="w-full btn-outline-cyber">تواصل مع المبيعات</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Consultation Form -->
+    <section class="py-20 relative grid-bg">
+        <div class="container mx-auto px-6">
+            <div class="max-w-2xl mx-auto reveal">
+                <div class="glass rounded-2xl p-8 md:p-12">
+                    <div class="text-center mb-8">
+                        <h2 class="text-3xl font-black mb-4">اطلب <span class="gradient-text">استشارة مجانية</span></h2>
+                        <p class="text-gray-400">خبراؤنا جاهزون لمساعدتك في تقييم وضعك الأمني</p>
+                    </div>
+
+                    <form id="consult-form" onsubmit="submitConsultation(event)" class="space-y-6">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium mb-2">الاسم الكامل</label>
+                                <input type="text" required class="w-full bg-cyber-darker border border-cyber-blue/30 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyber-blue transition" placeholder="محمد أحمد">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2">البريد الإلكتروني</label>
+                                <input type="email" required class="w-full bg-cyber-darker border border-cyber-blue/30 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyber-blue transition" placeholder="email@company.com">
+                            </div>
+                        </div>
+
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium mb-2">الشركة</label>
+                                <input type="text" class="w-full bg-cyber-darker border border-cyber-blue/30 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyber-blue transition" placeholder="اسم الشركة">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2">رقم الهاتف</label>
+                                <input type="tel" class="w-full bg-cyber-darker border border-cyber-blue/30 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyber-blue transition" placeholder="+966 50 123 4567">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium mb-2">نوع الاستشارة</label>
+                            <select class="w-full bg-cyber-darker border border-cyber-blue/30 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyber-blue transition">
+                                <option>تقييم أمني شامل</option>
+                                <option>اختبار اختراق</option>
+                                <option>استجابة لحادث أمني</option>
+                                <option>امتثال تنظيمي</option>
+                                <option>تدريب موظفين</option>
+                                <option>أخرى</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium mb-2">تفاصيل إضافية</label>
+                            <textarea rows="4" class="w-full bg-cyber-darker border border-cyber-blue/30 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyber-blue transition" placeholder="صف احتياجاتك الأمنية..."></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full btn-cyber text-lg">
+                            إرسال الطلب
+                            <i class="fas fa-paper-plane mr-2"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-20 relative">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-4xl font-black mb-4">الأسئلة <span class="gradient-text">الشائعة</span></h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">إجابات على أكثر الأسئلة تكراراً</p>
+            </div>
+
+            <div class="max-w-3xl mx-auto reveal">
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span class="font-bold">ما هو الأمن السيبراني ولماذا هو مهم؟</span>
+                        <i class="fas fa-chevron-down text-cyber-blue transition-transform"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p class="text-gray-400 leading-relaxed">الأمن السيبراني هو ممارسة حماية الأنظمة والشبكات والبرامج من الهجمات الرقمية. يشمل مجموعة من التقنيات والعمليات والممارسات المصممة لحماية الشبكات والأجهزة والبرامج والبيانات من الهجمات أو الوصول غير المصرح به. في عالمنا الرقمي اليوم، أصبح الأمن السيبراني ضرورة حيوية لحماية المعلومات الحساسة والحفاظ على استمرارية الأعمال.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span class="font-bold">كيف يمكنني معرفة إذا تم اختراق نظامي؟</span>
+                        <i class="fas fa-chevron-down text-cyber-blue transition-transform"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p class="text-gray-400 leading-relaxed">هناك علامات تحذيرية تشير إلى احتمالية الاختراق: بطء غير مبرر في النظام، ظهور برامج غريبة، تغيير كلمات المرور دون إذنك، رسائل بريد إلكتروني مرسلة من حسابك دون علمك، ظهور نوافذ منبثقة غير مرغوب فيها، واستنزاف غير طبيعي لبطارية الجهاز. منصتنا توفر أدوات مراقبة متقدمة تكشف هذه العلامات فوراً.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span class="font-bold">ما الفرق بين الفيروس وبرمجية الفدية؟</span>
+                        <i class="fas fa-chevron-down text-cyber-blue transition-transform"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p class="text-gray-400 leading-relaxed">الفيروس هو برنامج ضار يتكاثر عن طريق إلحاق نفسه بملفات أو برامج أخرى. أما برمجية الفدية (Ransomware) فهي نوع متخصص من البرمجيات الخبيثة تقوم بتشفير ملفات الضحية وطلب فدية مقابل فك التشفير. برمجيات الفدية تعتبر من أخطر التهديدات الحديثة لأنها تستهدف البيانات المهمة مباشرة.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span class="font-bold">هل تقدمون ضماناً على خدماتكم؟</span>
+                        <i class="fas fa-chevron-down text-cyber-blue transition-transform"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p class="text-gray-400 leading-relaxed">نعم، نقدم ضمان استرداد الأموال خلال 30 يوماً إذا لم تكن راضياً عن الخدمة. كما نضمن في خطتنا المؤسسية اتفاقية مستوى الخدمة (SLA) بنسبة 99.99% من وقت التشغيل. فريقنا متواجد على مدار الساعة لضمان استمرارية الحماية.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span class="font-bold">كيف أبدأ في تأمين شركتي الصغيرة؟</span>
+                        <i class="fas fa-chevron-down text-cyber-blue transition-transform"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p class="text-gray-400 leading-relaxed">ابدأ بأربع خطوات أساسية: 1) تحديث جميع البرامج والأنظمة باستمرار، 2) استخدام كلمات مرور قوية ومصادقة متعددة العوامل، 3) تدريب الموظفين على أساسيات الأمن السيبراني، 4) عمل نسخ احتياطي منتظم للبيانات المهمة. يمكنك الاستعانة بخبرائنا لتقييم وضعك الحالي ووضع خطة أمنية شاملة تناسب ميزانيتك.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section class="py-20 relative grid-bg">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-4xl font-black mb-4">المدونة <span class="gradient-text">الأمنية</span></h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">مقالات تعليمية وتحليلية في عالم الأمن السيبراني</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 reveal">
+                <article class="glass-card rounded-xl overflow-hidden blog-card">
+                    <div class="h-40 bg-gradient-to-br from-cyber-blue/20 to-cyber-purple/20 flex items-center justify-center">
+                        <i class="fas fa-lock text-4xl text-cyber-blue/50"></i>
+                    </div>
+                    <div class="p-4">
+                        <div class="text-xs text-gray-500 mb-2">أمن الشبكات</div>
+                        <h3 class="font-bold mb-2 text-sm">دليلك الشامل لجدران الحماية الجديدة</h3>
+                        <p class="text-xs text-gray-400 mb-3">تعرف على أحدث تقنيات NGFW وكيفية اختيار الأنسب...</p>
+                        <a href="#" class="text-cyber-blue text-xs font-bold">اقرأ المزيد</a>
+                    </div>
+                </article>
+
+                <article class="glass-card rounded-xl overflow-hidden blog-card">
+                    <div class="h-40 bg-gradient-to-br from-cyber-purple/20 to-cyber-blue/20 flex items-center justify-center">
+                        <i class="fas fa-brain text-4xl text-cyber-purple/50"></i>
+                    </div>
+                    <div class="p-4">
+                        <div class="text-xs text-gray-500 mb-2">الذكاء الاصطناعي</div>
+                        <h3 class="font-bold mb-2 text-sm">كيف يستخدم AI في كشف التهديدات</h3>
+                        <p class="text-xs text-gray-400 mb-3">التعلم العميق يغير قواعد اللعبة في الأمن السيبراني...</p>
+                        <a href="#" class="text-cyber-blue text-xs font-bold">اقرأ المزيد</a>
+                    </div>
+                </article>
+
+                <article class="glass-card rounded-xl overflow-hidden blog-card">
+                    <div class="h-40 bg-gradient-to-br from-red-500/20 to-orange-500/20 flex items-center justify-center">
+                        <i class="fas fa-exclamation-triangle text-4xl text-red-500/50"></i>
+                    </div>
+                    <div class="p-4">
+                        <div class="text-xs text-gray-500 mb-2">تحذيرات</div>
+                        <h3 class="font-bold mb-2 text-sm">أبرز 10 ثغرات أمنية في 2026</h3>
+                        <p class="text-xs text-gray-400 mb-3">قائمة محدثة بأخطر الثغرات التي يجب حماية نظامك منها...</p>
+                        <a href="#" class="text-cyber-blue text-xs font-bold">اقرأ المزيد</a>
+                    </div>
+                </article>
+
+                <article class="glass-card rounded-xl overflow-hidden blog-card">
+                    <div class="h-40 bg-gradient-to-br from-green-500/20 to-cyber-blue/20 flex items-center justify-center">
+                        <i class="fas fa-graduation-cap text-4xl text-green-500/50"></i>
+                    </div>
+                    <div class="p-4">
+                        <div class="text-xs text-gray-500 mb-2">تعليم</div>
+                        <h3 class="font-bold mb-2 text-sm">كيف تصبح محلل أمن سيبراني</h3>
+                        <p class="text-xs text-gray-400 mb-3">المسار الكامل للدخول في مجال الأمن السيبراني من الصفر...</p>
+                        <a href="#" class="text-cyber-blue text-xs font-bold">اقرأ المزيد</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & Footer -->
+    <section id="contact" class="py-20 relative">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-12 mb-16 reveal">
+                <div>
+                    <h2 class="text-4xl font-black mb-6">اتصل <span class="gradient-text">بنا</span></h2>
+                    <p class="text-gray-400 mb-8 leading-relaxed">فريقنا متواجد على مدار الساعة لمساعدتك في أي استفسار أو طوارئ أمنية. لا تتردد في التواصل معنا.</p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-full bg-cyber-blue/10 flex items-center justify-center">
+                                <i class="fas fa-phone text-cyber-blue"></i>
+                            </div>
+                            <div>
+                                <div class="text-sm text-gray-400">الهاتف</div>
+                                <div class="font-bold">+966 50 123 4567</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-full bg-cyber-purple/10 flex items-center justify-center">
+                                <i class="fas fa-envelope text-cyber-purple"></i>
+                            </div>
+                            <div>
+                                <div class="text-sm text-gray-400">البريد الإلكتروني</div>
+                                <div class="font-bold">security@cybershield.com</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-full bg-cyber-blue/10 flex items-center justify-center">
+                                <i class="fas fa-map-marker-alt text-cyber-blue"></i>
+                            </div>
+                            <div>
+                                <div class="text-sm text-gray-400">العنوان</div>
+                                <div class="font-bold">برج التقنية، الرياض، المملكة العربية السعودية</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4 mt-8">
+                        <a href="#" class="w-10 h-10 rounded-full bg-cyber-blue/10 flex items-center justify-center hover:bg-cyber-blue/30 transition text-cyber-blue">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-cyber-purple/10 flex items-center justify-center hover:bg-cyber-purple/30 transition text-cyber-purple">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-cyber-blue/10 flex items-center justify-center hover:bg-cyber-blue/30 transition text-cyber-blue">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-cyber-purple/10 flex items-center justify-center hover:bg-cyber-purple/30 transition text-cyber-purple">
+                            <i class="fab fa-discord"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="glass rounded-2xl p-8">
+                    <h3 class="text-xl font-bold mb-6">رسالة سريعة</h3>
+                    <form onsubmit="sendQuickMessage(event)" class="space-y-4">
+                        <input type="text" placeholder="الاسم" required class="w-full bg-cyber-darker border border-cyber-blue/30 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyber-blue">
+                        <input type="email" placeholder="البريد الإلكتروني" required class="w-full bg-cyber-darker border border-cyber-blue/30 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyber-blue">
+                        <textarea placeholder="رسالتك..." rows="4" required class="w-full bg-cyber-darker border border-cyber-blue/30 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyber-blue"></textarea>
+                        <button type="submit" class="w-full btn-cyber">إرسال الرسالة</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-cyber-blue/20 bg-cyber-darker pt-16 pb-8">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-8 mb-12">
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-cyber-blue to-cyber-purple flex items-center justify-center">
+                            <i class="fas fa-shield-alt text-white text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-black gradient-text">درع السايبر</h4>
+                            <p class="text-xs text-gray-500">CyberShield</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 text-sm leading-relaxed">منصة الأمن السيبراني المتقدمة - نحمي عالمك الرقمي بأحدث التقنيات والخبرات.</p>
+                </div>
+
+                <div>
+                    <h5 class="font-bold mb-4 text-cyber-blue">روابط سريعة</h5>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="#about" class="hover:text-cyber-blue transition">عن المنصة</a></li>
+                        <li><a href="#services" class="hover:text-cyber-blue transition">الخدمات</a></li>
+                        <li><a href="#pricing" class="hover:text-cyber-blue transition">الأسعار</a></li>
+                        <li><a href="#contact" class="hover:text-cyber-blue transition">اتصل بنا</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h5 class="font-bold mb-4 text-cyber-purple">الخدمات</h5>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="#" class="hover:text-cyber-purple transition">حماية الشبكات</a></li>
+                        <li><a href="#" class="hover:text-cyber-purple transition">اختبار الاختراق</a></li>
+                        <li><a href="#" class="hover:text-cyber-purple transition">الاستجابة للحوادث</a></li>
+                        <li><a href="#" class="hover:text-cyber-purple transition">التدريب الأمني</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h5 class="font-bold mb-4 text-cyber-blue">النشرة البريدية</h5>
+                    <p class="text-gray-400 text-sm mb-4">اشترك للحصول على آخر التهديدات والنصائح الأمنية</p>
+                    <form onsubmit="subscribeNewsletter(event)" class="flex gap-2">
+                        <input type="email" placeholder="بريدك الإلكتروني" class="flex-1 bg-cyber-darker border border-cyber-blue/30 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-cyber-blue">
+                        <button type="submit" class="btn-cyber px-4 py-2 text-sm">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 pt-8 flex flex-wrap justify-between items-center gap-4">
+                <div class="text-gray-500 text-sm">
+                    © 2026 درع السايبر. جميع الحقوق محفوظة.
+                </div>
+                <div class="flex gap-6 text-sm text-gray-500">
+                    <a href="#" class="hover:text-cyber-blue transition">سياسة الخصوصية</a>
+                    <a href="#" class="hover:text-cyber-blue transition">شروط الاستخدام</a>
+                    <a href="#" class="hover:text-cyber-blue transition">الأمان</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="login-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button onclick="closeLoginModal()" class="absolute top-4 left-4 text-gray-400 hover:text-white">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+            <div class="text-center mb-6">
+                <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-cyber-blue to-cyber-purple flex items-center justify-center">
+                    <i class="fas fa-user-shield text-2xl text-white"></i>
+                </div>
+                <h3 class="text-2xl font-bold">تسجيل الدخول</h3>
+                <p class="text-gray-400 text-sm">أدخل بيانات الاعتماد للوصول إلى لوحة التحكم</p>
+            </div>
+            <form onsubmit="handleLogin(event)" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium mb-2">البريد الإلكتروني</label>
+                    <input type="email" id="login-email" required class="w-full bg-cyber-darker border border-cyber-blue/30 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyber-blue" placeholder="admin@company.com">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-2">كلمة المرور</label>
+                    <input type="password" id="login-password" required class="w-full bg-cyber-darker border border-cyber-blue/30 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyber-blue" placeholder="••••••••">
+                </div>
+                <div class="flex justify-between text-sm">
+                    <label class="flex items-center gap-2 text-gray-400">
+                        <input type="checkbox" class="rounded bg-cyber-darker border-cyber-blue/30">
+                        تذكرني
+                    </label>
+                    <a href="#" class="text-cyber-blue hover:underline">نسيت كلمة المرور؟</a>
+                </div>
+                <button type="submit" class="w-full btn-cyber">تسجيل الدخول</button>
+            </form>
+            <div class="mt-4 text-center text-sm text-gray-400">
+                ليس لديك حساب؟ <button onclick="switchToRegister()" class="text-cyber-blue hover:underline">سجل الآن</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="register-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button onclick="closeRegisterModal()" class="absolute top-4 left-4 text-gray-400 hover:text-white">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+            <div class="text-center mb-6">
+                <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-cyber-purple to-cyber-blue flex items-center justify-center">
+                    <i class="fas fa-user-plus text-2xl text-white"></i>
+                </div>
+                <h3 class="text-2xl font-bold">إنشاء حساب جديد</h3>
+                <p class="text-gray-400 text-sm">ابدأ رحلتك الأمنية مع درع السايبر</p>
+            </div>
+            <form onsubmit="handleRegister(event)" class="space-y-4">
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium mb-2">الاسم الأول</label>
+                        <input type="text" required class="w-full bg-cyber-darker border border-cyber-blue/30 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyber-blue">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2">الاسم الأخير</label>
+                        <input type="text" required class="w-full bg-cyber-darker border border-cyber-blue/30 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyber-blue">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-2">البريد الإلكتروني</label>
+                    <input type="email" required class="w-full bg-cyber-darker border border-cyber-blue/30 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyber-blue" placeholder="you@company.com">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-2">كلمة المرور</label>
+                    <input type="password" required class="w-full bg-cyber-darker border border-cyber-blue/30 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyber-blue" placeholder="••••••••">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-2">تأكيد كلمة المرور</label>
+                    <input type="password" required class="w-full bg-cyber-darker border border-cyber-blue/30 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyber-blue" placeholder="••••••••">
+                </div>
+                <button type="submit" class="w-full btn-cyber">إنشاء الحساب</button>
+            </form>
+            <div class="mt-4 text-center text-sm text-gray-400">
+                لديك حساب بالفعل؟ <button onclick="switchToLogin()" class="text-cyber-blue hover:underline">تسجيل الدخول</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Demo Modal -->
+    <div id="demo-modal" class="modal-overlay">
+        <div class="modal-content" style="max-width: 600px;">
+            <button onclick="closeDemoModal()" class="absolute top-4 left-4 text-gray-400 hover:text-white">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+            <div class="text-center mb-6">
+                <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-cyber-blue to-cyber-purple flex items-center justify-center">
+                    <i class="fas fa-rocket text-2xl text-white"></i>
+                </div>
+                <h3 class="text-2xl font-bold">جرب المنصة مجاناً</h3>
+                <p class="text-gray-400 text-sm">احصل على 14 يوماً من الحماية الكاملة مجاناً</p>
+            </div>
+            <form onsubmit="startDemo(event)" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium mb-2">البريد الإلكتروني للعمل</label>
+                    <input type="email" required class="w-full bg-cyber-darker border border-cyber-blue/30 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyber-blue" placeholder="work@company.com">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-2">اسم الشركة</label>
+                    <input type="text" required class="w-full bg-cyber-darker border border-cyber-blue/30 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyber-blue" placeholder="اسم الشركة">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-2">عدد الموظفين</label>
+                    <select class="w-full bg-cyber-darker border border-cyber-blue/30 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyber-blue">
+                        <option>1-10</option>
+                        <option>11-50</option>
+                        <option>51-200</option>
+                        <option>201-1000</option>
+                        <option>1000+</option>
+                    </select>
+                </div>
+                <button type="submit" class="w-full btn-cyber text-lg">
+                    ابدأ الفترة التجريبية
+                    <i class="fas fa-arrow-left mr-2"></i>
+                </button>
+            </form>
+            <p class="text-center text-xs text-gray-500 mt-4">لا حاجة لبطاقة ائتمان. إلغاء في أي وقت.</p>
+        </div>
+    </div>
+
+    <!-- Tool Modal -->
+    <div id="tool-modal" class="modal-overlay">
+        <div class="modal-content" style="max-width: 500px;">
+            <button onclick="closeToolModal()" class="absolute top-4 left-4 text-gray-400 hover:text-white">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+            <div id="tool-content">
+                <!-- Content populated by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // ==================== PARTICLES SYSTEM ====================
+        const canvas = document.getElementById('particles-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+        
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 0.5;
+                this.speedX = Math.random() * 1 - 0.5;
+                this.speedY = Math.random() * 1 - 0.5;
+                this.color = Math.random() > 0.5 ? '#00d4ff' : '#a855f7';
+                this.opacity = Math.random() * 0.5 + 0.2;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x > canvas.width) this.x = 0;
+                if (this.x < 0) this.x = canvas.width;
+                if (this.y > canvas.height) this.y = 0;
+                if (this.y < 0) this.y = canvas.height;
+            }
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.globalAlpha = this.opacity;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+        
+        function initParticles() {
+            particles = [];
+            for (let i = 0; i < 100; i++) {
+                particles.push(new Particle());
+            }
+        }
+        
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            
+            // Draw connections
+            particles.forEach((a, i) => {
+                particles.slice(i + 1).forEach(b => {
+                    const dx = a.x - b.x;
+                    const dy = a.y - b.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    if (distance < 100) {
+                        ctx.strokeStyle = '#00d4ff';
+                        ctx.globalAlpha = 0.1 * (1 - distance / 100);
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(a.x, a.y);
+                        ctx.lineTo(b.x, b.y);
+                        ctx.stroke();
+                    }
+                });
+            });
+            
+            requestAnimationFrame(animateParticles);
+        }
+        initParticles();
+        animateParticles();
+
+        // ==================== CLOCK & UPTIME ====================
+        function updateClock() {
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString('ar-SA', { hour12: false });
+            document.getElementById('system-clock').textContent = timeStr;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // ==================== COUNTER ANIMATION ====================
+        const counters = document.querySelectorAll('.counter');
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counter = entry.target;
+                    const target = parseFloat(counter.getAttribute('data-target'));
+                    const isDecimal = target % 1 !== 0;
+                    const duration = 2000;
+                    const step = target / (duration / 16);
+                    let current = 0;
+                    
+                    const timer = setInterval(() => {
+                        current += step;
+                        if (current >= target) {
+                            current = target;
+                            clearInterval(timer);
+                        }
+                        counter.textContent = isDecimal ? current.toFixed(1) : Math.floor(current).toLocaleString();
+                    }, 16);
+                    
+                    counterObserver.unobserve(counter);
+                }
+            });
+        }, { threshold: 0.5 });
+        counters.forEach(counter => counterObserver.observe(counter));
+
+        // ==================== REVEAL ON SCROLL ====================
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // ==================== MOBILE MENU ====================
+        function toggleMobileMenu() {
+            document.getElementById('mobile-menu').classList.toggle('active');
+        }
+
+        // ==================== SMOOTH SCROLL ====================
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // ==================== MODALS ====================
+        function openLoginModal() {
+            document.getElementById('login-modal').classList.add('active');
+        }
+        function closeLoginModal() {
+            document.getElementById('login-modal').classList.remove('active');
+        }
+        function openRegisterModal() {
+            document.getElementById('register-modal').classList.add('active');
+        }
+        function closeRegisterModal() {
+            document.getElementById('register-modal').classList.remove('active');
+        }
+        function switchToRegister() {
+            closeLoginModal();
+            setTimeout(openRegisterModal, 300);
+        }
+        function switchToLogin() {
+            closeRegisterModal();
+            setTimeout(openLoginModal, 300);
+        }
+        function openDemoModal() {
+            document.getElementById('demo-modal').classList.add('active');
+        }
+        function closeDemoModal() {
+            document.getElementById('demo-modal').classList.remove('active');
+        }
+        function openConsultModal() {
+            scrollToSection('contact');
+        }
+
+        // ==================== LOGIN HANDLER ====================
+        function handleLogin(e) {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value;
+            showToast(`مرحباً! تم تسجيل الدخول بنجاح كـ ${email}`);
+            closeLoginModal();
+            
+            // Simulate dashboard redirect
+            setTimeout(() => {
+                document.getElementById('dashboard').scrollIntoView({ behavior: 'smooth' });
+            }, 1000);
+        }
+
+        function handleRegister(e) {
+            e.preventDefault();
+            showToast('تم إنشاء الحساب بنجاح! يمكنك الآن تسجيل الدخول.');
+            closeRegisterModal();
+            setTimeout(openLoginModal, 500);
+        }
+
+        // ==================== TOAST NOTIFICATION ====================
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-message').textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 4000);
+        }
+
+        // ==================== DASHBOARD CHARTS ====================
+        let attacksChart, trafficChart;
+        
+        function initCharts() {
+            const attacksCtx = document.getElementById('attacksChart').getContext('2d');
+            attacksChart = new Chart(attacksCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['DDoS', 'Malware', 'Phishing', 'SQL Injection', 'XSS'],
+                    datasets: [{
+                        data: [35, 25, 20, 12, 8],
+                        backgroundColor: ['#00d4ff', '#a855f7', '#ef4444', '#f97316', '#eab308'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'right',
+                            labels: { color: '#9ca3af', font: { family: 'Cairo' } }
+                        }
+                    }
+                }
+            });
+
+            const trafficCtx = document.getElementById('trafficChart').getContext('2d');
+            trafficChart = new Chart(trafficCtx, {
+                type: 'line',
+                data: {
+                    labels: ['00:00', '04:00', '08:00', '12:00', '16:00', '20:00'],
+                    datasets: [{
+                        label: 'حركة مرور آمنة',
+                        data: [120, 190, 300, 250, 400, 350],
+                        borderColor: '#00d4ff',
+                        backgroundColor: 'rgba(0, 212, 255, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    }, {
+                        label: 'تهديدات تم صدها',
+                        data: [5, 12, 25, 18, 35, 22],
+                        borderColor: '#ef4444',
+                        backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            labels: { color: '#9ca3af', font: { family: 'Cairo' } }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            ticks: { color: '#9ca3af' },
+                            grid: { color: 'rgba(255, 255, 255, 0.05)' }
+                        },
+                        x: {
+                            ticks: { color: '#9ca3af' },
+                            grid: { color: 'rgba(255, 255, 255, 0.05)' }
+                        }
+                    }
+                }
+            });
+        }
+
+        function refreshDashboard() {
+            const icon = document.getElementById('refresh-icon');
+            icon.classList.add('fa-spin');
+            
+            // Update random stats
+            document.getElementById('active-threats').textContent = Math.floor(Math.random() * 50) + 10;
+            document.getElementById('blocked-attacks').textContent = (Math.floor(Math.random() * 2000) + 500).toLocaleString();
+            document.getElementById('vulnerabilities').textContent = Math.floor(Math.random() * 15) + 1;
+            document.getElementById('last-update').textContent = 'الآن';
+            
+            // Update charts
+            if (attacksChart) {
+                attacksChart.data.datasets[0].data = [
+                    Math.floor(Math.random() * 40) + 10,
+                    Math.floor(Math.random() * 30) + 10,
+                    Math.floor(Math.random() * 25) + 5,
+                    Math.floor(Math.random() * 15) + 5,
+                    Math.floor(Math.random() * 10) + 5
+                ];
+                attacksChart.update();
+            }
+            
+            setTimeout(() => icon.classList.remove('fa-spin'), 1000);
+            showToast('تم تحديث لوحة التحكم بنجاح');
+        }
+
+        // ==================== VULNERABILITY SCANNER ====================
+        const vulnerabilitiesDB = [
+            { name: 'Cross-Site Scripting (XSS)', severity: 'high', description: 'ثغرة تسمح بحقن كود JavaScript ضار في صفحات الويب' },
+            { name: 'SQL Injection', severity: 'critical', description: 'ثغرة في قاعدة البيانات تسمح بالوصول غير المصرح للبيانات' },
+            { name: 'Insecure Direct Object References', severity: 'medium', description: 'الوصول المباشر للكائنات دون التحقق من الصلاحيات' },
+            { name: 'Missing Security Headers', severity: 'medium', description: 'غياب رؤوس الأمان الأساسية في استجابة HTTP' },
+            { name: 'Outdated SSL/TLS', severity: 'high', description: 'استخدام إصدارات قديمة وغير آمنة من بروتوكول SSL' },
+            { name: 'Information Disclosure', severity: 'low', description: 'تسريب معلومات حساسة في رسائل الخطأ' },
+            { name: 'CSRF Vulnerability', severity: 'medium', description: 'ثغرة تزوير الطلبات عبر المواقع' },
+            { name: 'Directory Traversal', severity: 'critical', description: 'الوصول غير المصرح للملفات والمجلدات على الخادم' },
+            { name: 'Weak Password Policy', severity: 'medium', description: 'سياسة كلمات المرور ضعيفة وغير آمنة' },
+            { name: 'Unpatched Software', severity: 'high', description: 'برامج غير محدثة تحتوي على ثغرات معروفة' }
+        ];
+
+        function startScan() {
+            const target = document.getElementById('scan-target').value;
+            if (!target) {
+                showToast('الرجاء إدخال عنوان URL أو IP');
+                return;
+            }
+
+            const btn = document.getElementById('scan-btn');
+            const progress = document.getElementById('scan-progress');
+            const results = document.getElementById('scan-results');
+            const terminal = document.getElementById('scan-terminal');
+            
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin ml-2"></i> جاري الفحص...';
+            progress.classList.remove('hidden');
+            results.classList.add('hidden');
+            terminal.innerHTML = '';
+            
+            const scanSteps = [
+                'بدء الفحص الأمني...',
+                `التحقق من الاتصال بـ ${target}...`,
+                'فحوصات DNS و WHOIS...',
+                'الكشف عن المنافذ المفتوحة...',
+                'فحص شهادة SSL/TLS...',
+                'البحث عن ثغرات XSS...',
+                'البحث عن ثغرات SQL Injection...',
+                'فحص رؤوس الأمان...',
+                'تحليل محتوى الموقع...',
+                'إنشاء التقرير النهائي...'
+            ];
+            
+            let step = 0;
+            const interval = setInterval(() => {
+                const percent = (step / scanSteps.length) * 100;
+                document.getElementById('scan-bar').style.width = percent + '%';
+                document.getElementById('scan-percent').textContent = Math.floor(percent) + '%';
+                
+                if (step < scanSteps.length) {
+                    const line = document.createElement('div');
+                    line.className = 'terminal-line';
+                    line.textContent = `[${new Date().toLocaleTimeString('ar-SA')}] ${scanSteps[step]}`;
+                    terminal.appendChild(line);
+                    terminal.scrollTop = terminal.scrollHeight;
+                    step++;
+                } else {
+                    clearInterval(interval);
+                    showScanResults();
+                }
+            }, 800);
+        }
+
+        function showScanResults() {
+            const progress = document.getElementById('scan-progress');
+            const results = document.getElementById('scan-results');
+            const btn = document.getElementById('scan-btn');
+            
+            progress.classList.add('hidden');
+            results.classList.remove('hidden');
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fas fa-redo ml-2"></i> إعادة الفحص';
+            
+            // Random results
+            const foundVulns = vulnerabilitiesDB.sort(() => 0.5 - Math.random()).slice(0, Math.floor(Math.random() * 5) + 3);
+            let critical = 0, high = 0, medium = 0, low = 0;
+            
+            const list = document.getElementById('vulnerabilities-list');
+            list.innerHTML = '';
+            
+            foundVulns.forEach((vuln, i) => {
+                if (vuln.severity === 'critical') critical++;
+                else if (vuln.severity === 'high') high++;
+                else if (vuln.severity === 'medium') medium++;
+                else low++;
+                
+                const colors = {
+                    critical: 'red',
+                    high: 'orange',
+                    medium: 'yellow',
+                    low: 'green'
+                };
+                
+                const div = document.createElement('div');
+                div.className = `p-4 rounded-lg border bg-${colors[vuln.severity]}-500/5 border-${colors[vuln.severity]}-500/30`;
+                div.innerHTML = `
+                    <div class="flex justify-between items-start mb-2">
+                        <h5 class="font-bold text-${colors[vuln.severity]}-400">${vuln.name}</h5>
+                        <span class="px-2 py-1 rounded text-xs bg-${colors[vuln.severity]}-500/20 text-${colors[vuln.severity]}-400">${vuln.severity}</span>
+                    </div>
+                    <p class="text-sm text-gray-400">${vuln.description}</p>
+                    <div class="mt-3 flex gap-2">
+                        <button class="text-xs px-3 py-1 rounded bg-cyber-blue/20 text-cyber-blue hover:bg-cyber-blue/30 transition">تفاصيل</button>
+                        <button class="text-xs px-3 py-1 rounded bg-green-500/20 text-green-400 hover:bg-green-500/30 transition">حلول</button>
+                    </div>
+                `;
+                list.appendChild(div);
+            });
+            
+            // Animate counters
+            animateValue('critical-count', critical);
+            animateValue('high-count', high);
+            animateValue('medium-count', medium);
+            animateValue('low-count', low);
+            
+            showToast(`اكتمل الفحص! تم العثور على ${foundVulns.length} ثغرات`);
+        }
+
+        function animateValue(id, target) {
+            const el = document.getElementById(id);
+            let current = 0;
+            const step = target / 20;
+            const timer = setInterval(() => {
+                current += step;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                el.textContent = Math.floor(current);
+            }, 50);
+        }
+
+        function downloadReport() {
+            showToast('جاري تحميل التقرير الأمني (PDF)...');
+            setTimeout(() => {
+                // Create a fake PDF download
+                const blob = new Blob(['تقرير الأمن السيبراني - درع السايبر\n\nتم إنشاء هذا التقرير تلقائياً.\n\nالنتائج: تم العثور على ثغرات أمنية تحتاج إلى معالجة فورية.'], { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'cybershield-security-report.txt';
+                a.click();
+                URL.revokeObjectURL(url);
+            }, 1500);
+        }
+
+        function aiAnalysis() {
+            showToast('جاري تحليل الثغرات بالذكاء الاصطناعي...');
+            setTimeout(() => {
+                showToast('اكتمل التحليل: 85% من الثغرات يمكن إصلاحها تلقائياً');
+            }, 2000);
+        }
+
+        // ==================== THREAT INTELLIGENCE ====================
+        const threats = [
+            { type: 'DDoS Attack', source: 'Russia', target: 'Financial Sector', severity: 'critical', time: 'منذ 2 دقيقة' },
+            { type: 'Phishing Campaign', source: 'Unknown', target: 'Email Users', severity: 'high', time: 'منذ 5 دقائق' },
+            { type: 'Malware Detected', source: 'Brazil', target: 'Healthcare', severity: 'high', time: 'منذ 8 دقائق' },
+            { type: 'Port Scan', source: 'China', target: 'Government', severity: 'medium', time: 'منذ 12 دقيقة' },
+            { type: 'SQL Injection', source: 'Nigeria', target: 'E-commerce', severity: 'critical', time: 'منذ 15 دقيقة' },
+            { type: 'Brute Force', source: 'USA', target: 'Cloud Services', severity: 'medium', time: 'منذ 20 دقيقة' },
+            { type: 'Zero-Day', source: 'North Korea', target: 'Critical Infrastructure', severity: 'critical', time: 'منذ 25 دقيقة' },
+            { type: 'Ransomware', source: 'Eastern Europe', target: 'Manufacturing', severity: 'high', time: 'منذ 30 دقيقة' }
+        ];
+
+        function renderThreats(filter = 'all') {
+            const container = document.getElementById('threat-feed');
+            container.innerHTML = '';
+            
+            const filtered = filter === 'all' ? threats : threats.filter(t => t.severity === filter);
+            
+            filtered.forEach((threat, i) => {
+                const severityColors = {
+                    critical: 'red',
+                    high: 'orange',
+                    medium: 'yellow',
+                    low: 'green'
+                };
+                
+                const div = document.createElement('div');
+                div.className = `p-4 rounded-lg border bg-${severityColors[threat.severity]}-500/5 border-${severityColors[threat.severity]}-500/20 flex justify-between items-center`;
+                div.style.animationDelay = `${i * 0.1}s`;
+                div.innerHTML = `
+                    <div class="flex items-center gap-3">
+                        <div class="w-2 h-2 rounded-full bg-${severityColors[threat.severity]}-500 animate-pulse"></div>
+                        <div>
+                            <div class="font-bold text-sm">${threat.type}</div>
+                            <div class="text-xs text-gray-400">${threat.source} → ${threat.target}</div>
+                        </div>
+                    </div>
+                    <div class="text-left">
+                        <span class="text-xs text-${severityColors[threat.severity]}-400">${threat.severity}</span>
+                        <div class="text-xs text-gray-500">${threat.time}</div>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+        }
+        renderThreats();
+
+        function filterThreats(type) {
+            renderThreats(type);
+        }
+
+        // Auto-refresh threats
+        setInterval(() => {
+            const newThreat = {
+                type: ['DDoS', 'Phishing', 'Malware', 'Port Scan', 'Brute Force'][Math.floor(Math.random() * 5)] + ' Attack',
+                source: ['Russia', 'China', 'USA', 'Brazil', 'Unknown'][Math.floor(Math.random() * 5)],
+                target: ['Financial', 'Healthcare', 'Government', 'E-commerce', 'Cloud'][Math.floor(Math.random() * 5)],
+                severity: ['critical', 'high', 'medium'][Math.floor(Math.random() * 3)],
+                time: 'الآن'
+            };
+            threats.unshift(newThreat);
+            if (threats.length > 10) threats.pop();
+            renderThreats();
+        }, 10000);
+
+        // ==================== SECURITY TOOLS ====================
+        function openTool(tool) {
+            const modal = document.getElementById('tool-modal');
+            const content = document.getElementById('tool-content');
+            
+            const tools = {
+                password: `
+                    <div class="text-center mb-6">
+                        <i class="fas fa-key text-4xl text-cyber-blue mb-4"></i>
+                        <h3 class="text-2xl font-bold">فاحص قوة كلمة المرور</h3>
+                    </div>
+                    <div class="space-y-4">
+                        <input type="password" id="password-input" placeholder="أدخل كلمة المرور" class="w-full bg-cyber-darker border border-cyber-blue/30 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyber-blue">
+                        <div id="password-strength" class="h-2 rounded-full bg-gray-700 overflow-hidden">
+                            <div class="h-full w-0 transition-all duration-500"></div>
+                        </div>
+                        <p id="password-feedback" class="text-center text-sm"></p>
+                        <button onclick="checkPassword()" class="w-full btn-cyber">فحص القوة</button>
+                    </div>
+                `,
+                hash: `
+                    <div class="text-center mb-6">
+                        <i class="fas fa-fingerprint text-4xl text-cyber-purple mb-4"></i>
+                        <h3 class="text-2xl font-bold">مولد الهاش</h3>
+                    </div>
+                    <div class="space-y-4">
+                        <input type="text" id="hash-input" placeholder="أدخل النص" class="w-full bg-cyber-darker border border-cyber-blue/30 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyber-blue">
+                        <select id="hash-type" class="w-full bg-cyber-darker border border-cyber-blue/30 rounded-lg px-4 py-3 text-white">
+                            <option value="md5">MD5</option>
+                            <option value="sha256">SHA-256</option>
+                            <option value="sha512">SHA-512</option>
+                        </select>
+                        <div id="hash-output" class="p-4 bg-cyber-darker rounded-lg border border-cyber-blue/30 font-mono text-sm break-all text-cyber-blue min-h-[60px]"></div>
+                        <button onclick="generateHash()" class="w-full btn-cyber">توليد الهاش</button>
+                    </div>
+                `,
+                ip: `
+                    <div class="text-center mb-6">
+                        <i class="fas fa-map-marker-alt text-4xl text-cyber-blue mb-4"></i>
+                        <h3 class="text-2xl font-bold">فاحص IP</h3>
+                    </div>
+                    <div class="space-y-4">
+                        <input type="text" id="ip-input" placeholder="192.168.1.1" class="w-full bg-cyber-darker border border-cyber-blue/30 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyber-blue">
+                        <button onclick="analyzeIP()" class="w-full btn-cyber">تحليل</button>
+                        <div id="ip-results" class="space-y-2 text-sm"></div>
+                    </div>
+                `,
+                ssl: `
+                    <div class="text-center mb-6">
+                        <i class="fas fa-lock text-4xl text-cyber-purple mb-4"></i>
+                        <h3 class="text-2xl font-bold">فاحص SSL</h3>
+                    </div>
+                    <div class="space-y-4">
+                        <input type="text" id="ssl-input" placeholder="example.com" class="w-full bg-cyber-darker border border-cyber-blue/30 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-cyber-blue">
+                        <button onclick="checkSSL()" class="w-full btn-cyber">فحص الشهادة</button>
+                        <div id="ssl-results" class="space-y-2 text-sm"></div>
+                    </div>
+                `
+            };
+            
+            content.innerHTML = tools[tool];
+            modal.classList.add('active');
+        }
+
+        function closeToolModal() {
+            document.getElementById('tool-modal').classList.remove('active');
+        }
+
+        function checkPassword() {
+            const password = document.getElementById('password-input').value;
+            const bar = document.getElementById('password-strength').querySelector('div');
+            const feedback = document.getElementById('password-feedback');
+            
+            let strength = 0;
+            if (password.length > 6) strength++;
+            if (password.length > 10) strength++;
+            if (/[A-Z]/.test(password)) strength++;
+            if (/[0-9]/.test(password)) strength++;
+            if (/[^A-Za-z0-9]/.test(password)) strength++;
+            
+            const colors = ['bg-red-500', 'bg-red-500', 'bg-yellow-500', 'bg-yellow-500', 'bg-green-500', 'bg-green-500'];
+            const widths = ['0%', '20%', '40%', '60%', '80%', '100%'];
+            const messages = ['ضعيفة جداً', 'ضعيفة', 'متوسطة', 'جيدة', 'قوية', 'قوية جداً'];
+            
+            bar.className = `h-full transition-all duration-500 ${colors[strength]}`;
+            bar.style.width = widths[strength];
+            feedback.textContent = `قوة كلمة المرور: ${messages[strength]}`;
+            feedback.className = `text-center text-sm ${strength < 2 ? 'text-red-400' : strength < 4 ? 'text-yellow-400' : 'text-green-400'}`;
+        }
+
+        function generateHash() {
+            const text = document.getElementById('hash-input').value;
+            const type = document.getElementById('hash-type').value;
+            const output = document.getElementById('hash-output');
+            
+            if (!text) {
+                output.textContent = 'الرجاء إدخال نص';
+                return;
+            }
+            
+            // Simple hash simulation
+            let hash = '';
+            const chars = '0123456789abcdef';
+            const lengths = { md5: 32, sha256: 64, sha512: 128 };
+            
+            for (let i = 0; i < lengths[type]; i++) {
+                hash += chars[Math.floor(Math.random() * chars.length)];
+            }
+            
+            output.textContent = hash;
+        }
+
+        function analyzeIP() {
+            const ip = document.getElementById('ip-input').value;
+            const results = document.getElementById('ip-results');
+            
+            if (!ip) {
+                results.innerHTML = '<p class="text-red-400">الرجاء إدخال عنوان IP</p>';
+                return;
+            }
+            
+            results.innerHTML = `
+                <div class="p-3 bg-cyber-darker rounded border border-cyber-blue/20">
+                    <div class="flex justify-between"><span>الدولة:</span> <span class="text-cyber-blue">السعودية</span></div>
+                    <div class="flex justify-between"><span>المدينة:</span> <span class="text-cyber-blue">الرياض</span></div>
+                    <div class="flex justify-between"><span>ISP:</span> <span class="text-cyber-blue">STC</span></div>
+                    <div class="flex justify-between"><span>الحالة:</span> <span class="text-green-400">آمن</span></div>
+                </div>
+            `;
+        }
+
+        function checkSSL() {
+            const domain = document.getElementById('ssl-input').value;
+            const results = document.getElementById('ssl-results');
+            
+            if (!domain) {
+                results.innerHTML = '<p class="text-red-400">الرجاء إدخال اسم النطاق</p>';
+                return;
+            }
+            
+            results.innerHTML = `
+                <div class="p-3 bg-cyber-darker rounded border border-green-500/20">
+                    <div class="flex justify-between"><span>الشهادة:</span> <span class="text-green-400">صالحة</span></div>
+                    <div class="flex justify-between"><span>المُصدِر:</span> <span class="text-cyber-blue">Let's Encrypt</span></div>
+                    <div class="flex justify-between"><span>تاريخ الانتهاء:</span> <span class="text-cyber-blue">2026-12-31</span></div>
+                    <div class="flex justify-between"><span>التشفير:</span> <span class="text-cyber-blue">TLS 1.3</span></div>
+                </div>
+            `;
+        }
+
+        // ==================== TESTIMONIALS ====================
+        let currentTestimonial = 0;
+        const testimonialSlides = document.querySelectorAll('.testimonial-slide');
+        const testimonialDots = document.querySelectorAll('#testimonial-dots span');
+
+        function showTestimonial(index) {
+            testimonialSlides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === index);
+            });
+            testimonialDots.forEach((dot, i) => {
+                dot.className = i === index ? 'w-3 h-3 rounded-full bg-cyber-blue' : 'w-3 h-3 rounded-full bg-gray-600';
+            });
+        }
+
+        function nextTestimonial() {
+            currentTestimonial = (currentTestimonial + 1) % testimonialSlides.length;
+            showTestimonial(currentTestimonial);
+        }
+
+        function prevTestimonial() {
+            currentTestimonial = (currentTestimonial - 1 + testimonialSlides.length) % testimonialSlides.length;
+            showTestimonial(currentTestimonial);
+        }
+
+        // Auto-rotate testimonials
+        setInterval(nextTestimonial, 6000);
+
+        // ==================== FAQ ====================
+        function toggleFaq(element) {
+            const answer = element.nextElementSibling;
+            const icon = element.querySelector('i');
+            
+            answer.classList.toggle('active');
+            icon.style.transform = answer.classList.contains('active') ? 'rotate(180deg)' : 'rotate(0deg)';
+        }
+
+        // ==================== PRICING ====================
+        function subscribe(plan) {
+            showToast(`تم اختيار خطة ${plan}. جاري تحويلك لصفحة الدفع...`);
+            setTimeout(() => {
+                showToast('هذه نسخة تجريبية - لا يوجد دفع حقيقي');
+            }, 2000);
+        }
+
+        // ==================== FORMS ====================
+        function submitConsultation(e) {
+            e.preventDefault();
+            showToast('تم إرسال طلب الاستشارة بنجاح! سنتواصل معك خلال 24 ساعة.');
+            e.target.reset();
+        }
+
+        function sendQuickMessage(e) {
+            e.preventDefault();
+            showToast('تم إرسال رسالتك بنجاح!');
+            e.target.reset();
+        }
+
+        function subscribeNewsletter(e) {
+            e.preventDefault();
+            showToast('تم الاشتراك في النشرة البريدية بنجاح!');
+            e.target.reset();
+        }
+
+        function startDemo(e) {
+            e.preventDefault();
+            showToast('تم تفعيل الفترة التجريبية المجانية لمدة 14 يوماً!');
+            closeDemoModal();
+        }
+
+        // ==================== LANGUAGE SWITCH ====================
+        let currentLang = 'ar';
+        function toggleLanguage() {
+            currentLang = currentLang === 'ar' ? 'en' : 'ar';
+            document.getElementById('lang-text').textContent = currentLang === 'ar' ? 'English' : 'العربية';
+            showToast(currentLang === 'ar' ? 'تم التحويل للعربية' : 'Switched to English');
+            // Note: Full translation would require more extensive changes
+        }
+
+        // ==================== RANDOM TOASTS ====================
+        const toastMessages = [
+            'تم صد هجوم DDoS جديد',
+            'تحديث قاعدة بيانات التهديدات',
+            'اكتشاف برمجية خبيثة جديدة',
+            'تم تأمين نقطة ضعف حرجة',
+            'فحص أمني تلقائي مكتمل'
+        ];
+
+        setInterval(() => {
+            if (Math.random() > 0.7) {
+                const msg = toastMessages[Math.floor(Math.random() * toastMessages.length)];
+                showToast(msg);
+            }
+        }, 30000);
+
+        // ==================== INIT ====================
+        document.addEventListener('DOMContentLoaded', () => {
+            initCharts();
+            
+            // Close modals on outside click
+            document.querySelectorAll('.modal-overlay').forEach(modal => {
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) {
+                        modal.classList.remove('active');
+                    }
+                });
+            });
+        });
+
+        // ==================== KEYBOARD SHORTCUTS ====================
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('active'));
+            }
+        });
+    </script>
+</body>
+</html>
